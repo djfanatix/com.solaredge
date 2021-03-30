@@ -6,8 +6,8 @@ class SolaredgeModbusApp extends Homey.App {
 
   onInit() {
     this.log('Initializing Solaredge Modbus app ...');
-
-    new Homey.FlowCardCondition('isOperationalStatus')
+/*
+    this.Homey.Flow.getcard('isOperationalStatus')
           .register()
           .registerRunListener((args, state) => {
             if (args.device.getCapabilityValue('status') == Homey.__('Off') && args.status == '1') {
@@ -30,6 +30,7 @@ class SolaredgeModbusApp extends Homey.App {
               return Promise.resolve(false);
             }
           })
+          */
       }
 }
 
