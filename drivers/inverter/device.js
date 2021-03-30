@@ -86,7 +86,7 @@ class solaredgeModbusDevice extends Homey.Device {
           this.setCapabilityValue('ownconsumption', ownconsumption);
           let tokens = {'consumption': ownconsumption }
           let ownconsumptionTrigger = this.homey.flow.getTriggerCard('changedConsumption');
-          this.Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+        //  this.Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
 
         }
 
