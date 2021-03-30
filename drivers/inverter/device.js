@@ -102,7 +102,7 @@ class solaredgeModbusDevice extends Homey.Device {
 
           // OPERATIONAL STATUS
          if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
-           this.setCapabilityValue('operational_status', Homey.__('Off'));
+           this.setCapabilityValue('status', Homey.__('Off'));
            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
          } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && inverterstatus == 2) {
            this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
