@@ -44,7 +44,7 @@ class solaredgeModbusDevice extends Homey.Device {
           client.readHoldingRegisters(40093, 2), // total generated power
           client.readHoldingRegisters(40084, 1), //powerscale AC
           client.readHoldingRegisters(40210, 1),  //powerscale importexport meter
-          client.readHoldingRegisters(40107, 1)  //test
+          client.readHoldingRegisters(40107, 1)  //status
 
 
         ]).then((results) => {
@@ -54,11 +54,9 @@ class solaredgeModbusDevice extends Homey.Device {
           var total = results[3].response._body._valuesAsBuffer;
           var powerscale = results[4].response._body._valuesAsBuffer;
           var meterscale = results[5].response._body._valuesAsArray[0];
-          var test = results[6].response._body._valuesAsArray[0];
+          var status= results[6].response._body._valuesAsArray[0];
 
           //logs
-
-        this.log('test', test);
 
 
 
@@ -101,6 +99,33 @@ class solaredgeModbusDevice extends Homey.Device {
           var totaal = total.readUInt32BE().toString();
           var measureyield = totaal / 100;
           this.setCapabilityValue('measure_yield', measureyield);
+
+          // OPERATIONAL STATUS
+         if (this.getCapabilityValue('status') != Homey.__('Off') && status == 1) {
+           this.setCapabilityValue('operational_status', Homey.__('Off'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
+         } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && operational_code == 2) {
+           this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping (auto-shutdown) – Night mode') }, {});
+         } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && operational_code == 3) {
+           this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping (auto-shutdown) – Night mode') }, {});
+         } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && operational_code == 4) {
+           this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Inverter is ON and producing power') }, {});
+         } else if (this.getCapabilityValue('operational_status') != Homey.__('Production (curtailed)') && operational_code == 5) {
+           this.setCapabilityValue('status', Homey.__('Production (curtailed)'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Production (curtailed)') }, {});
+         } else if (this.getCapabilityValue('operational_status') != Homey.__('Shutting down') && operational_code == 6) {
+           this.setCapabilityValue('status', Homey.__('Shutting down'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
+         } else if (this.getCapabilityValue('operational_status') != Homey.__('Fault') && operational_code == 7) {
+           this.setCapabilityValue('status', Homey.__('Fault'));
+           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
+         } else if (this.getCapabilityValue('operational_status') != Homey.__('Maintenance/setup') && operational_code == 8) {
+         this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
+         Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
+        }
 
           //errors
         }).catch((err) => {

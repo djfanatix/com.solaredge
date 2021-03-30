@@ -8,6 +8,7 @@ The solaredge api is only limited to 300 calls/ day, so you get only updates eve
 The modbus app receives data every few seconds.
 If you have the Solaredge energy monitor installed you can maximize your self-consumption and limit your exported power by using it. You can make flows based on your generated solar power, exported power, imported power or current power consumption.
 
+The iOS / android app from Solaredge is fine, so it is not the purpose to create this app again.
 
 ## Supported devices
 Following devices are supported
@@ -23,7 +24,7 @@ General information can be found at:
 https://www.solaredge.com/sites/default/files/sunspec-implementation-technical-note.pdf
 
 ## Inverters with SetApp
-// I didn't test this myself, as I don't have this kind of inverter.
+// I didn't test this myself, as I don't have this kind of inverter.//
 Enable wifi direct on the inverter. Connect to the inverter access point like you would for a normal wifi network. The wifi password is published at the right side of the inverter. Then open up a browser and go to http://172.16.0.1 . From this webpage you can enable modbus TCP without setApp or installer account.
 
 ## Inverters with display (without SetApp)
@@ -41,6 +42,15 @@ For support please use the official support topic on the forum [here](https://co
 
 ## Thanks
 Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where this app is based on.
+
+## To Do (by priority)
+- Learn to program :-)
+- Implement Inverter STATUS
+- Create tokens and flows
+- Implement Storage
+- Make a virtual device with some derived data
+- Phase and load monitoring
+
 
 
 ## Changelog
