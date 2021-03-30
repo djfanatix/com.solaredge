@@ -70,25 +70,25 @@ class solaredgeModbusDevice extends Homey.Device {
           var powergrid_import = 65535 - powergrid;
           var ownconsumption = acpower + powergrid_import;
             this.setCapabilityValue('powergrid_import', powergrid_import);
-            Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+      //      Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
             this.setCapabilityValue('powergrid_export', powergrid_import);
-            Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
+      //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
             this.setCapabilityValue('ownconsumption', ownconsumption);
-            Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+    //        Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           } else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
           this.setCapabilityValue('powergrid_export', powergrid_export);
-          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+  //        Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
           this.setCapabilityValue('powergrid_import', powergrid_import);
-          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
+    //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
-          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
-            }
-            // unsigned integer omzetten
-            //function int16(v)
-            //return (v << 16) >> 16;
+          let ownconsumptionTrigger = this.homey.flow.getTriggerCard('changedConsumption');
+          let tokens = {
+            'consumption': ownconsumption
+          }
+        }
 
           /* VOLTAGE */
           if (voltage === 65535) {
