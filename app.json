@@ -149,14 +149,12 @@
 			],
       "capabilitiesOptions": {
         "measure_power": {
-					"icon": "/assets/sun.svg",
           "title": {
             "en": "Solar Power",
             "nl": "Solar Power"
           }
 				},
-					"measure_power.consumption": {
-						"icon": "/assets/sun.svg",
+					"measure_power.ownconsumption": {
 	          "title": {
 	            "en": "Own Consumption",
 	            "nl": "Eigenverbruik"
