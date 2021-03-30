@@ -6,6 +6,9 @@ class SolaredgeModbusApp extends Homey.App {
 
   onInit() {
     this.log('Initializing Solaredge Modbus app ...');
+
+    this.ownconsumption = new Homey.FlowCardTrigger('changedConsumption');
+    this.ownconsumption.register();
 /*
     this.Homey.Flow.getcard('isOperationalStatus')
           .register()

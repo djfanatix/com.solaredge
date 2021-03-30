@@ -229,13 +229,6 @@
             },
             "example": 200
           }
-        ],
-				"args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          }
         ]
 	    },
       {
@@ -258,13 +251,6 @@
             },
             "example": "Fault"
           }
-        ],
-				"args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          }
         ]
 	    },
       {
@@ -283,13 +269,6 @@
             },
             "example": 303
           }
-        ],
-				"args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
-          }
         ]
 	    },
       {
@@ -307,13 +286,6 @@
               "nl": "Power Import (W)"
             },
             "example": 42
-          }
-        ],
-				"args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=inverter"
           }
         ]
 	    }
