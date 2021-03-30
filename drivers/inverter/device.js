@@ -44,6 +44,7 @@ class solaredgeModbusDevice extends Homey.Device {
           client.readHoldingRegisters(40093, 2), // total generated power
           client.readHoldingRegisters(40084, 1), //powerscale AC
           client.readHoldingRegisters(40210, 1)  //powerscale importexport meter
+          client.readHoldingRegisters(40020, 1)  //test
 
 
         ]).then((results) => {
@@ -53,9 +54,11 @@ class solaredgeModbusDevice extends Homey.Device {
           var total = results[3].response._body._valuesAsBuffer;
           var powerscale = results[4].response._body._valuesAsBuffer;
           var meterscale = results[5].response._body._valuesAsArray[0];
-          var powerscale1 = powerscale.readInt16BE().toString();
-          this.log('powerscale', powerscale1);
-          this.log('meterscale', meterscale);
+          var test = results[6]
+
+          //logs
+          this.log('test', test);
+
 
 
           // POWER AC
