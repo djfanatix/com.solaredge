@@ -229,7 +229,7 @@
             },
             "example": "Fault"
           }
-        ],
+        ]
 	    },
       {
 		    "id": "changedExportPower",
@@ -247,7 +247,7 @@
             },
             "example": 303
           }
-        ],
+        ]
 	    },
       {
 		    "id": "changedImportPower",
