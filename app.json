@@ -64,6 +64,7 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/total_yield.svg",
+			"insights": true,
       "units": {
         "en": "KWh",
         "nl": "KWh"
@@ -89,6 +90,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/powergrid_feed_in.svg",
       "units": {
         "en": "W",
@@ -104,6 +106,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/home.svg",
       "units": {
         "en": "W",
@@ -119,6 +122,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/powergrid_feed_in.svg",
       "units": {
         "en": "W",
@@ -209,6 +213,31 @@
 	],
   "flow": {
     "triggers": [
+			{
+		    "id": "changedConsumption",
+				"title": {
+					"en": "Consumption Changed",
+					"nl": "Verbruik gewijzigd"
+				},
+        "tokens": [
+          {
+            "name": "consumption",
+            "type": "number",
+            "title": {
+              "en": "Consumption",
+              "nl": "Verbruik"
+            },
+            "example": 200
+          }
+        ],
+				"args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=inverter"
+          }
+        ]
+	    },
       {
 		    "id": "changedStatus",
 				"title": {
