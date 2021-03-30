@@ -19,15 +19,22 @@ class InverterDriver extends Homey.Driver {
       'changedImportPower',
       'changedConsumption'
     ];
-    this._registerFlow('trigger', triggers, Homey.FlowCardTriggerDevice);
+    this._registerFlow('trigger', triggers, Homey.FlowCardTriggerCard);
 
     //Register conditions
+  }
+
+  _registerFlow(type, keys, cls) {
+    keys.forEach(key => {
+      this.log(`- flow '${type}.${key}'`);
+      this.flowCards[`${type}.${key}`] = new cls(key).register();
+    });
   }
 
   triggerFlow(flow, tokens, device) {
     this.log(`Triggering flow '${flow}' with tokens`, tokens);
 
-    if (this.flowCards[flow] instanceof Homey.FlowCardTriggerDevice) {
+    if (this.flowCards[flow] instanceof Homey.FlowCardTriggerCard) {
       this.log('- device trigger for ', device.getName());
       this.flowCards[flow].trigger(device, tokens);
 
