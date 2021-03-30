@@ -24,13 +24,6 @@ class InverterDriver extends Homey.Driver {
     //Register conditions
   }
 
-  _registerFlow(type, keys, cls) {
-    keys.forEach(key => {
-      this.log(`- flow '${type}.${key}'`);
-      this.flowCards[`${type}.${key}`] = new cls(key).register();
-    });
-  }
-
   triggerFlow(flow, tokens, device) {
     this.log(`Triggering flow '${flow}' with tokens`, tokens);
 
