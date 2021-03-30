@@ -23,7 +23,7 @@ General information can be found at:
 https://www.solaredge.com/sites/default/files/sunspec-implementation-technical-note.pdf
 
 ## Inverters with SetApp
-// I didn't test this myself, as I don't have this kind of inverter
+// I didn't test this myself, as I don't have this kind of inverter.
 Enable wifi direct on the inverter. Connect to the inverter access point like you would for a normal wifi network. The wifi password is published at the right side of the inverter. Then open up a browser and go to http://172.16.0.1 . From this webpage you can enable modbus TCP without setApp or installer account.
 
 ## Inverters with display (without SetApp)
