@@ -73,14 +73,14 @@ class solaredgeModbusDevice extends Homey.Device {
           var ownconsumption = acpower + powergrid_import;
             this.setCapabilityValue('powergrid_import', powergrid_import);
             this.setCapabilityValue('powergrid_export', powergrid_export);
-            this.setCapabilityValue('measure_power.ownconsumption', ownconsumption);
+            this.setCapabilityValue('ownconsumption', ownconsumption);
           } else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
           this.setCapabilityValue('powergrid_export', powergrid_export);
           this.setCapabilityValue('powergrid_import', powergrid_import);
-          this.setCapabilityValue('measure_power.ownconsumption', ownconsumption);
+          this.setCapabilityValue('ownconsumption', ownconsumption);
             }
             // unsigned integer omzetten
             //function int16(v)

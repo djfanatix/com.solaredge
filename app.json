@@ -140,7 +140,7 @@
 			"class": "solarpanel",
 			"capabilities": [
         "measure_power",
-				"measure_power.ownconsumption",
+				"ownconsumption",
 				"powergrid_import",
 				"powergrid_export",
 				"measure_voltage",
@@ -153,13 +153,7 @@
             "en": "Solar Power",
             "nl": "Solar Power"
           }
-				},
-					"measure_power.ownconsumption": {
-	          "title": {
-	            "en": "Own Consumption",
-	            "nl": "Eigenverbruik"
-	          }
-						}
+				}
       },
 			"pair": [
 				{
