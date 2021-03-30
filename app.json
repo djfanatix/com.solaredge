@@ -140,7 +140,7 @@
 			"class": "solarpanel",
 			"capabilities": [
         "measure_power",
-				"measure_power.consumption",
+				"measure_power.ownconsumption",
 				"powergrid_import",
 				"powergrid_export",
 				"measure_voltage",
