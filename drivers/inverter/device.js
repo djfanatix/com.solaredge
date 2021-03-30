@@ -73,14 +73,14 @@ class solaredgeModbusDevice extends Homey.Device {
           var ownconsumption = acpower + powergrid_import;
             this.setCapabilityValue('powergrid_import', powergrid_import);
             this.setCapabilityValue('powergrid_export', powergrid_export);
-            this.setCapabilityValue('ownconsumption', ownconsumption);
+            this.setCapabilityValue('measure_power.ownconsumption', ownconsumption);
           } else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
           this.setCapabilityValue('powergrid_export', powergrid_export);
           this.setCapabilityValue('powergrid_import', powergrid_import);
-          this.setCapabilityValue('ownconsumption', ownconsumption);
+          this.setCapabilityValue('measure_power.ownconsumption', ownconsumption);
             }
             // unsigned integer omzetten
             //function int16(v)
@@ -100,7 +100,7 @@ class solaredgeModbusDevice extends Homey.Device {
           var measureyield = totaal / 100;
           this.setCapabilityValue('measure_yield', measureyield);
 
-          // OPERATIONAL STATUS
+          /* OPERATIONAL STATUS
          if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
            this.setCapabilityValue('status', Homey.__('Off'));
            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
@@ -126,7 +126,7 @@ class solaredgeModbusDevice extends Homey.Device {
          this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
         }
-
+        */
           //errors
         }).catch((err) => {
           this.log(err);
