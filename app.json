@@ -15,19 +15,32 @@
 	"author": {
 		"name": "Pieter Verougstraete",
 		"email": "pieter.Verougstraete@gmail.com",
-		"website": "https://github.com/jghaanstra/sma.modbus"
+		"website": "https://github.com/djfanatix/com.solaredge"
 	},
+	"contributors": {
+    "developers": [
+      {
+        "name": "Richard Barkestam",
+        "email": "richard@barkestam.se"
+      },
+      {
+        "name": "Jelger Haanstra",
+        "email": "homey@solidewebservices.com"
+      }
+    ]
+  },
 	"contributing": {
-		"donate": {
-			"paypal": {
-				"username": "jghaanstra"
-			}
-		}
-	},
+	 "donate": {
+		 "paypal": {
+			 "username": "pieterverougstraete",
+			 "currency": "EUR"
+		 }
+	 }
+ },
 	"bugs": {
-		"url": "https://github.com/jghaanstra/sma.modbus/issues"
+		"url": "https://github.com/djfanatix/com.solaredge/issues"
 	},
-  "homeyCommunityTopicId": 696,
+  "homeyCommunityTopicId": 1,
 	"images": {
 		"large": "./assets/images/large.png",
 		"small": "./assets/images/small.png"
@@ -154,7 +167,7 @@
 				"large": "drivers/inverter/assets/images/large.jpg",
 				"small": "drivers/inverter/assets/images/small.jpg"
 			},
-			"class": "sensor",
+			"class": "solarpanel",
 			"capabilities": [
         "measure_power",
 				"ownconsumption",

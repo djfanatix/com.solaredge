@@ -1,8 +1,8 @@
 {
   "pair": {
-    "title": "SMA omvormer toevoegen",
+    "title": "Solaredge omvormer toevoegen",
     "nosettings": "Vul a.u.b. alle verplichte velden in.",
-    "intro": "Voer het IP adres, het poortnummer en de polling frequentie in van je SMA omvormer.",
+    "intro": "Voer het IP adres, het poortnummer en de polling frequentie in van je Solaredge omvormer.",
     "address": "IP adres",
     "port": "Poort",
     "polling": "Polling frequentie",
