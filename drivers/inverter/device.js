@@ -43,7 +43,7 @@ class solaredgeModbusDevice extends Homey.Device {
           client.readHoldingRegisters(40196, 1), //voltage
           client.readHoldingRegisters(40093, 2), // total generated power
           client.readHoldingRegisters(40084, 1), //powerscale AC
-          client.readHoldingRegisters(40210, 1)  //powerscale importexport meter
+          client.readHoldingRegisters(40210, 1),  //powerscale importexport meter
           client.readHoldingRegisters(40020, 1)  //test
 
 
