@@ -145,7 +145,7 @@
 				"powergrid_export",
 				"measure_voltage",
         "measure_yield",
-				"operational_status"
+				"status"
 			],
       "capabilitiesOptions": {
         "measure_power": {
