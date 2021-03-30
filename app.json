@@ -217,7 +217,7 @@
 				},
 				"titleFormatted": {
           "en": "Status changed to [[inverter_status]]",
-          "sv": "Status veranderd naar [[inverter_status]]"
+          "nl": "Status veranderd naar [[inverter_status]]"
         },
         "tokens": [
           {
@@ -243,18 +243,18 @@
 	      ]
 	    },
       {
-		    "id": "changedPowerDrawn",
+		    "id": "changedExportPower",
 				"title": {
-					"en": "Power Drawn Changed (W)",
-					"nl": "Stroom afname gewijzigd (W)"
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
 				},
         "tokens": [
           {
-            "name": "drawn",
+            "name": "export",
             "type": "number",
             "title": {
-              "en": "Power Drawn (W)",
-              "nl": "Stroom afname (W)"
+              "en": "Power Export (W)",
+              "nl": "Power Export (W)"
             },
             "example": 303
           }
@@ -272,18 +272,18 @@
 	      ]
 	    },
       {
-		    "id": "changedPowerGridFeedin",
+		    "id": "changedImportPower",
 				"title": {
-					"en": "Powergrid Feed In Changed (W)",
-					"nl": "Vermogen netvoeding gewijzigd (W)"
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
 				},
         "tokens": [
           {
-            "name": "feedin",
+            "name": "import",
             "type": "number",
             "title": {
-              "en": "Powergrid Feed In (W)",
-              "nl": "Vermogen netvoeding (W)"
+              "en": "Power Import (W)",
+              "nl": "Power Import (W)"
             },
             "example": 42
           }
@@ -300,67 +300,6 @@
 	        }
 	      ]
 	    }
-    ],
-    "conditions": [
-      {
-        "id": "isStatus",
-        "title": {
-          "en": "Operation status !{{is|is not}}",
-          "nl": "Operationele status !{{is|is niet}}"
-        },
-        "args": [
-          {
-            "name": "status",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "Off",
-                  "nl": "Uit"
-                }
-              },
-              {
-                "id": "2",
-                "label": {
-                  "en": "Battery Standby",
-                  "nl": "Batterij standby"
-                }
-              },
-              {
-                "id": "2292",
-                "label": {
-                  "en": "Battery Charging",
-                  "nl": "Batterij opladen"
-                }
-              },
-              {
-                "id": "2293",
-                "label": {
-                  "en": "Battery Discharging",
-                  "nl": "Batterij ontladen"
-                }
-              },
-              {
-                "id": "16777213",
-                "label": {
-                  "en": "Information Not Available",
-                  "nl": "Informatie Niet Beschikbaar"
-                }
-              }
-            ]
-          },
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Storage",
-              "nl": "Selecteer Storage"
-            },
-            "filter": "driver_id=storage"
-	        }
-        ]
-      }
-	  ]
+    ]
   }
 }
