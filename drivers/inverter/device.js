@@ -57,11 +57,13 @@ class solaredgeModbusDevice extends Homey.Device {
           var test = results[6].response._body._valuesAsArray[0];
 
           //logs
-          this.log('test', test);
+
+        this.log('test', test);
 
 
 
           // POWER AC
+          var powerscale1 = powerscale.readInt16BE().toString();
           var acpower = powerac*(Math.pow(10, powerscale1));
           this.setCapabilityValue('measure_power', acpower);
 
