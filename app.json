@@ -216,8 +216,8 @@
 			{
 		    "id": "changedConsumption",
 				"title": {
-					"en": "Consumption Changed",
-					"nl": "Verbruik gewijzigd"
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
 				},
         "tokens": [
           {
@@ -253,8 +253,8 @@
             "name": "status",
             "type": "string",
             "title": {
-              "en": "Operational Status",
-              "nl": "Operationele status"
+              "en": "Status",
+              "nl": "Status"
             },
             "example": "Fault"
           }
