@@ -1,0 +1,32 @@
+{
+  "name": "solaredge.modbus",
+  "version": "1.0.0",
+  "description": "Monitor Solaredge inverters over modbus protocol",
+  "main": "app.js",
+  "dependencies": {
+    "jsmodbus": "^3.1.4",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "homey": "^2.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jghaanstra/sma.modbus.git"
+  },
+  "keywords": [
+    "SMA",
+    "inverter",
+    "solar",
+    "sunnyboy"
+  ],
+  "author": "Jelger Haanstra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jghaanstra/sma.modbus/issues"
+  },
+  "homepage": "https://github.com/jghaanstra/sma.modbus"
+}
