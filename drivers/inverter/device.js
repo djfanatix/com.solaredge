@@ -85,7 +85,9 @@ class solaredgeModbusDevice extends Homey.Device {
           this.setCapabilityValue('powergrid_import', powergrid_import);
     //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
-          let ownconsumptiontrigger = this.homey.flow.getTriggerCard('changedConsumption');
+
+      //    Homey.app.userEnteredTrigger.trigger(this, this.getFlowCardTokens(), {});
+          this.ownconsumptiontrigger = this.homey.flow.getDeviceTriggerCard('changedConsumption');
           Homey.app.ownconsumptiontrigger.trigger({'consumption': ownconsumption });
         //  let tokens = {'consumption': ownconsumption }
         //  let ownconsumptionTrigger = this.homey.flow.getTriggerCard('changedConsumption');
