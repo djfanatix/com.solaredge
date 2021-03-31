@@ -113,7 +113,7 @@ class SolaredgeModbusDevice extends Homey.Device {
             this.setCapabilityValue('status', Homey.__('Standby'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Standby') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Grid Monitoring_wake-up') && inverterstatus == 3) {
-            this.setCapabilityValue('status', Homey.__('Grid Monitoring_wake-up') – Night mode'));
+            this.setCapabilityValue('status', Homey.__('Grid Monitoring_wake-up'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Grid Monitoring_wake-up') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && inverterstatus == 4) {
             this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
