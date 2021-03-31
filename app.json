@@ -148,7 +148,7 @@
             },
             "example": 200
           }
-        ]
+        ],
 				"args": [
 	        {
             "name": "device",
