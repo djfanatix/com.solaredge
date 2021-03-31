@@ -46,7 +46,6 @@ Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where th
 ## To Do (by priority)
 - Learn to program :-)
 - Implement Inverter STATUS
-- Create tokens and flows
 - Implement Storage
 - Make a virtual device with some derived data
 - Phase and load monitoring
@@ -55,5 +54,7 @@ Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where th
 
 ## Changelog
 
+### v1.0.1
+* Flows and tokens are working
 ### v1.0.0
 * Initial release
