@@ -105,6 +105,33 @@ class SolaredgeModbusDevice extends Homey.Device {
           var measureyield = totaal / 100;
           this.setCapabilityValue('measure_yield', measureyield);
 
+          // TATUS
+          if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
+            this.setCapabilityValue('status', Homey.__('Off'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && inverterstatus == 2) {
+            this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping (auto-shutdown) – Night mode') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Grid Monitoring/wake-up') && inverterstatus == 3) {
+            this.setCapabilityValue('status', Homey.__('Grid Monitoring/wake-up') – Night mode'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Grid Monitoring/wake-up') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && inverterstatus == 4) {
+            this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Inverter is ON and producing power') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Production (curtailed)') && inverterstatus == 5) {
+            this.setCapabilityValue('status', Homey.__('Production (curtailed)'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Production (curtailed)') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Shutting down') && inverterstatus == 6) {
+            this.setCapabilityValue('status', Homey.__('Shutting down'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Fault') && inverterstatus == 7) {
+            this.setCapabilityValue('status', Homey.__('Fault'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Maintenance/setup') && inverterstatus == 8) {
+          this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
+          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
+          }
+          
           //errors
         }).catch((err) => {
           this.log(err);
