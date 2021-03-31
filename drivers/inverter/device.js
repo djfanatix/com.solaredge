@@ -26,6 +26,10 @@ class solaredgeModbusDevice extends Homey.Device {
     }
 
     let client = new modbus.client.TCP(socket)
+    
+    //register flowCards
+    changedConsumptiontrigger.register()
+
 
     socket.connect(options);
 
