@@ -8,6 +8,9 @@ class SolaredgeModbusApp extends Homey.App {
     this.log('Initializing Solaredge Modbus app ...');
     this.log('Registering flows');
     new Homey.FlowCardTriggerDevice('changedConsumption').register();
+    new Homey.FlowCardTriggerDevice('changedStatus').register();
+    new Homey.FlowCardTriggerDevice('changedExportPower').register();
+    new Homey.FlowCardTriggerDevice('changedImportPower').register();
       }
 }
 
