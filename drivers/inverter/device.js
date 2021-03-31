@@ -108,6 +108,7 @@ class SolaredgeModbusDevice extends Homey.Device {
           // Total power = acc32
           var totaal = total.readUInt32BE().toString();
           var measureyield = totaal / 100;
+          var measureyield = Math.round(measureyield)
           this.setCapabilityValue('measure_yield', measureyield);
 
           // STATUS
