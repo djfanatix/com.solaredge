@@ -19,7 +19,7 @@ class InverterDriver extends Homey.Driver {
       'changedImportPower',
       'changedConsumption'
     ];
-    this._registerFlow('trigger', triggers, Homey.FlowCardTriggerCard);
+    this._registerFlow('trigger', triggers, Homey.FlowCardTrigger);
 
     //Register conditions
   }

@@ -85,7 +85,7 @@ class solaredgeModbusDevice extends Homey.Device {
           this.setCapabilityValue('powergrid_import', powergrid_import);
     //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
-
+/*
       //    Homey.app.userEnteredTrigger.trigger(this, this.getFlowCardTokens(), {});
           this.ownconsumptiontrigger = this.homey.flow.getDeviceTriggerCard('changedConsumption');
           Homey.app.ownconsumptiontrigger.trigger({'consumption': ownconsumption });
@@ -93,6 +93,19 @@ class solaredgeModbusDevice extends Homey.Device {
         //  let ownconsumptionTrigger = this.homey.flow.getTriggerCard('changedConsumption');
         //  this.Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
         }
+        this.userSystemAwayTrigger = this.homey.flow.getDeviceTriggerCard('WT-RFID.EU-user_system_away');
+// Trigger event, "System disarmed"
+			if (this.isSystemArmed() == false) {
+				this.userSystemAwayTrigger.trigger(this, tokens, {}, (err, result) => {
+					if (err) {
+						this.log(err);
+						return this.homey.error(err);
+					}
+				});
+*/
+
+
+
 
           /* VOLTAGE */
           if (voltage === 65535) {
