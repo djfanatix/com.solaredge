@@ -38,7 +38,7 @@ Go to the menu by the following steps:
 - To modify the TCP port, select Modbus TCP --> TCP Port, set the port number and long-press Enter
 
 ## Support topic
-For support please use the official support topic on the forum [here](https://community.athom.com/t/696).
+For support please use the official support topic on the forum [here](https://community.athom.com/t/app-solaredge/45487).
 
 ## Thanks
 Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where this app is based on.
