@@ -7,6 +7,14 @@ class SolaredgeModbusApp extends Homey.App {
   onInit() {
     this.log('Initializing Solaredge Modbus app ...');
 
+    let changedConsumptiontrigger = this.homey.flow.getTriggerCard('changedConsumption');
+
+
+      }
+}
+
+module.exports = SolaredgeModbusApp;
+
 
 //    this.ownconsumption.register();
 /*
@@ -34,7 +42,5 @@ class SolaredgeModbusApp extends Homey.App {
             }
           })
           */
-      }
-}
 
-module.exports = SolaredgeModbusApp;
+          //   changedConsumptiontrigger.register().registerRunListener(async (args,state) => {return true});
