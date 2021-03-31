@@ -56,7 +56,7 @@ class SolaredgeModbusDevice extends Homey.Device {
           var voltage = results[2].response._body._valuesAsArray[0];
           var total = results[3].response._body._valuesAsBuffer;
           var powerscale = results[4].response._body._valuesAsBuffer;
-          var meterscale = results[5].response._body._valuesAsArray[0];
+          var meterscale = results[5].response._body._valuesAsBuffer;
           var inverterstatus= results[6].response._body._valuesAsArray[0];
 
           //logs
@@ -64,31 +64,36 @@ class SolaredgeModbusDevice extends Homey.Device {
           // POWER AC conversion
           var powerscale1 = powerscale.readInt16BE().toString();
           var acpower = powerac*(Math.pow(10, powerscale1));
+          var acpower = Math.round(acpower)
           this.setCapabilityValue('measure_power', acpower);
 
+          //Meterscale conversion
+          var meterscale1 = meterscale.readInt16BE().toString();
+          var powergrid = powergrid*(Math.pow(10, meterscale1));
+          var powergrid = Math.round(powergrid)
 
           //  POWER
-        if (powergrid > 32767) {
-          var powergrid_export = 0;
-          var powergrid_import = 65535 - powergrid;
-          var ownconsumption = acpower + powergrid_import;
-          this.setCapabilityValue('powergrid_export', powergrid_export);
-          this.setCapabilityValue('powergrid_import', powergrid_import);
-          this.setCapabilityValue('ownconsumption', ownconsumption);
-          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+          if (powergrid > 32767) {
+            var powergrid_export = 0;
+            var powergrid_import = 65535 - powergrid;
+            var ownconsumption = acpower + powergrid_import;
+            this.setCapabilityValue('powergrid_export', powergrid_export);
+            this.setCapabilityValue('powergrid_import', powergrid_import);
+            this.setCapabilityValue('ownconsumption', ownconsumption);
+            Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           }
           else {
-          var powergrid_export = powergrid;
-          var powergrid_import = 0;
-          var ownconsumption = acpower - powergrid_export;
-          this.setCapabilityValue('powergrid_export', powergrid_export);
-          this.setCapabilityValue('powergrid_import', powergrid_import);
-          this.setCapabilityValue('ownconsumption', ownconsumption);
-          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+            var powergrid_export = powergrid;
+            var powergrid_import = 0;
+            var ownconsumption = acpower - powergrid_export;
+            this.setCapabilityValue('powergrid_export', powergrid_export);
+            this.setCapabilityValue('powergrid_import', powergrid_import);
+            this.setCapabilityValue('ownconsumption', ownconsumption);
+            Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           }
 
           /* VOLTAGE */
@@ -103,7 +108,35 @@ class SolaredgeModbusDevice extends Homey.Device {
           // Total power = acc32
           var totaal = total.readUInt32BE().toString();
           var measureyield = totaal / 100;
+          var measureyield = Math.round(measureyield)
           this.setCapabilityValue('measure_yield', measureyield);
+
+          // STATUS
+          if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
+            this.setCapabilityValue('status', Homey.__('Off'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Standby') && inverterstatus == 2) {
+            this.setCapabilityValue('status', Homey.__('Standby'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Standby') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Grid Monitoring_wake-up') && inverterstatus == 3) {
+            this.setCapabilityValue('status', Homey.__('Grid Monitoring_wake-up'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Grid Monitoring_wake-up') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && inverterstatus == 4) {
+            this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Inverter is ON and producing power') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Production') && inverterstatus == 5) {
+            this.setCapabilityValue('status', Homey.__('Production'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Production') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Shutting down') && inverterstatus == 6) {
+            this.setCapabilityValue('status', Homey.__('Shutting down'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Fault') && inverterstatus == 7) {
+            this.setCapabilityValue('status', Homey.__('Fault'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Maintenance/setup') && inverterstatus == 8) {
+          this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
+          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
+          }
 
           //errors
         }).catch((err) => {

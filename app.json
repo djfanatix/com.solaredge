@@ -138,6 +138,10 @@
 					"en": "Consumption Changed (W)",
 					"nl": "Verbruik gewijzigd (W)"
 				},
+				"titleFormatted": {
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
+				},
         "tokens": [
           {
             "name": "consumption",
@@ -200,6 +204,10 @@
 					"en": "Power Export Changed (W)",
 					"nl": "Power Export gewijzigd (W)"
 				},
+				"titleFormatted": {
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
+				},
         "tokens": [
           {
             "name": "export",
@@ -226,6 +234,10 @@
       {
 		    "id": "changedImportPower",
 				"title": {
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
+				},
+				"titleFormatted": {
 					"en": "Power Import Changed (W)",
 					"nl": "Power Import gewijzigd (W)"
 				},
