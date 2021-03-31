@@ -71,11 +71,12 @@ class solaredgeModbusDevice extends Homey.Device {
           var ownconsumption = acpower + powergrid_import;
             this.setCapabilityValue('powergrid_import', powergrid_import);
       //      Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-            this.setCapabilityValue('powergrid_export', powergrid_import);
+            this.setCapabilityValue('powergrid_export', powergrid_export);
       //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
             this.setCapabilityValue('ownconsumption', ownconsumption);
     //        Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
-          } else {
+          }
+          else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
@@ -85,11 +86,10 @@ class solaredgeModbusDevice extends Homey.Device {
     //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
           this.ownconsumption = this.homey.flow.getTriggerCard('changedConsumption');
-        //  Homey.app.ownconsumption.trigger({'consumption': ownconsumption });
+          Homey.app.ownconsumption.trigger({'consumption': ownconsumption });
         //  let tokens = {'consumption': ownconsumption }
         //  let ownconsumptionTrigger = this.homey.flow.getTriggerCard('changedConsumption');
         //  this.Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
-
         }
 
           /* VOLTAGE */
