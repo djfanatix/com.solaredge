@@ -13,6 +13,7 @@ class InverterDriver extends Homey.Driver {
     this.log('Registering flows');
 
     let changedConsumptiontrigger = this.homey.flow.getTriggerCard('changedConsumption')
+    changedConsumptiontrigger.register()
 }
 }
 
