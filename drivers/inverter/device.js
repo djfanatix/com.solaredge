@@ -72,25 +72,25 @@ class SolaredgeModbusDevice extends Homey.Device {
           var powergrid_export = 0;
           var powergrid_import = 65535 - powergrid;
           var ownconsumption = acpower + powergrid_import;
-            this.setCapabilityValue('powergrid_import', powergrid_import);
-            Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-            this.setCapabilityValue('powergrid_export', powergrid_export);
-            Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-            this.setCapabilityValue('ownconsumption', ownconsumption);
-            Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+          this.setCapabilityValue('powergrid_export', powergrid_export);
+          this.setCapabilityValue('powergrid_import', powergrid_import);
+          this.setCapabilityValue('ownconsumption', ownconsumption);
+          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           }
           else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
           this.setCapabilityValue('powergrid_export', powergrid_export);
-          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
           this.setCapabilityValue('powergrid_import', powergrid_import);
-          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
+          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
           Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           }
-          
+
           /* VOLTAGE */
           if (voltage === 65535) {
            this.setCapabilityValue('measure_voltage', 0);
