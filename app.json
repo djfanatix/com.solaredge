@@ -1,6 +1,6 @@
 {
 	"id": "solaredge.modbus",
-	"sdk": 3,
+	"sdk": 2,
   "brandColor": "#df001c",
 	"name": {
 		"en": "Solaredge Inverters",

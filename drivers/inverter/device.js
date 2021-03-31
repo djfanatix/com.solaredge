@@ -88,10 +88,7 @@ class SolaredgeModbusDevice extends Homey.Device {
           this.setCapabilityValue('powergrid_import', powergrid_import);
     //      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_import }, {});
           this.setCapabilityValue('ownconsumption', ownconsumption);
-          changedConsumptiontrigger.trigger('consumption': ownconsumption);
-          .catch(this.error)
-          .then(this.log);
-      //    Homey.app.userEnteredTrigger.trigger(this, this.getFlowCardTokens(), {});
+          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
           }
           /* VOLTAGE */
           if (voltage === 65535) {
