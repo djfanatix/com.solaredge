@@ -130,6 +130,86 @@
       }
     }
   },
+	"flow": {
+    "triggers": [
+			{
+		    "id": "changedConsumption",
+				"title": {
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "consumption",
+            "type": "number",
+            "title": {
+              "en": "Consumption",
+              "nl": "Verbruik"
+            },
+            "example": 200
+          }
+        ]
+	    },
+      {
+		    "id": "changedStatus",
+				"title": {
+					"en": "Status Changed",
+					"nl": "Status gewijzigd"
+				},
+				"titleFormatted": {
+          "en": "Status changed to [[inverter_status]]",
+          "nl": "Status veranderd naar [[inverter_status]]"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Status",
+              "nl": "Status"
+            },
+            "example": "Fault"
+          }
+        ]
+	    },
+      {
+		    "id": "changedExportPower",
+				"title": {
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "export",
+            "type": "number",
+            "title": {
+              "en": "Power Export (W)",
+              "nl": "Power Export (W)"
+            },
+            "example": 303
+          }
+        ]
+	    },
+      {
+		    "id": "changedImportPower",
+				"title": {
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "import",
+            "type": "number",
+            "title": {
+              "en": "Power Import (W)",
+              "nl": "Power Import (W)"
+            },
+            "example": 42
+          }
+        ]
+	    }
+    ]
+  },
 	"drivers": [
 		{
 			"id": "inverter",
@@ -210,85 +290,5 @@
 				}
 			]
 		}
-	],
-  "flow": {
-    "triggers": [
-			{
-		    "id": "changedConsumption",
-				"title": {
-					"en": "Consumption Changed (W)",
-					"nl": "Verbruik gewijzigd (W)"
-				},
-        "tokens": [
-          {
-            "name": "consumption",
-            "type": "number",
-            "title": {
-              "en": "Consumption",
-              "nl": "Verbruik"
-            },
-            "example": 200
-          }
-        ]
-	    },
-      {
-		    "id": "changedStatus",
-				"title": {
-					"en": "Status Changed",
-					"nl": "Status gewijzigd"
-				},
-				"titleFormatted": {
-          "en": "Status changed to [[inverter_status]]",
-          "nl": "Status veranderd naar [[inverter_status]]"
-        },
-        "tokens": [
-          {
-            "name": "status",
-            "type": "string",
-            "title": {
-              "en": "Status",
-              "nl": "Status"
-            },
-            "example": "Fault"
-          }
-        ]
-	    },
-      {
-		    "id": "changedExportPower",
-				"title": {
-					"en": "Power Export Changed (W)",
-					"nl": "Power Export gewijzigd (W)"
-				},
-        "tokens": [
-          {
-            "name": "export",
-            "type": "number",
-            "title": {
-              "en": "Power Export (W)",
-              "nl": "Power Export (W)"
-            },
-            "example": 303
-          }
-        ]
-	    },
-      {
-		    "id": "changedImportPower",
-				"title": {
-					"en": "Power Import Changed (W)",
-					"nl": "Power Import gewijzigd (W)"
-				},
-        "tokens": [
-          {
-            "name": "import",
-            "type": "number",
-            "title": {
-              "en": "Power Import (W)",
-              "nl": "Power Import (W)"
-            },
-            "example": 42
-          }
-        ]
-	    }
-    ]
-  }
+	]
 }
