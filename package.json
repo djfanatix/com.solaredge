@@ -15,18 +15,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jghaanstra/sma.modbus.git"
+    "url": "git+https://github.com/djfanatix/com.solaredge"
   },
   "keywords": [
-    "SMA",
+    "Solaredge",
     "inverter",
-    "solar",
-    "sunnyboy"
+    "solar"
   ],
-  "author": "Jelger Haanstra",
+  "author": "Pieter Verougstraete",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jghaanstra/sma.modbus/issues"
+    "url": "https://github.com/djfanatix/com.solaredge/issues"
   },
-  "homepage": "https://github.com/jghaanstra/sma.modbus"
+  "homepage": "https://github.com/djfanatix/com.solaredge"
 }

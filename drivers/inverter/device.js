@@ -5,7 +5,7 @@ const modbus = require('jsmodbus');
 const net = require('net');
 const socket = new net.Socket();
 
-class solaredgeModbusDevice extends Homey.Device {
+class SolaredgeModbusDevice extends Homey.Device {
 
   onInit() {
 
@@ -26,6 +26,9 @@ class solaredgeModbusDevice extends Homey.Device {
     }
 
     let client = new modbus.client.TCP(socket)
+
+    //register flowCards
+
 
     socket.connect(options);
 
@@ -58,33 +61,35 @@ class solaredgeModbusDevice extends Homey.Device {
 
           //logs
 
-
-
-          // POWER AC
+          // POWER AC conversion
           var powerscale1 = powerscale.readInt16BE().toString();
           var acpower = powerac*(Math.pow(10, powerscale1));
           this.setCapabilityValue('measure_power', acpower);
 
 
-      //  POWER import
+          //  POWER
         if (powergrid > 32767) {
           var powergrid_export = 0;
           var powergrid_import = 65535 - powergrid;
           var ownconsumption = acpower + powergrid_import;
-            this.setCapabilityValue('powergrid_import', powergrid_import);
-            this.setCapabilityValue('powergrid_export', powergrid_export);
-            this.setCapabilityValue('ownconsumption', ownconsumption);
-          } else {
+          this.setCapabilityValue('powergrid_export', powergrid_export);
+          this.setCapabilityValue('powergrid_import', powergrid_import);
+          this.setCapabilityValue('ownconsumption', ownconsumption);
+          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+          }
+          else {
           var powergrid_export = powergrid;
           var powergrid_import = 0;
           var ownconsumption = acpower - powergrid_export;
           this.setCapabilityValue('powergrid_export', powergrid_export);
           this.setCapabilityValue('powergrid_import', powergrid_import);
           this.setCapabilityValue('ownconsumption', ownconsumption);
-            }
-            // unsigned integer omzetten
-            //function int16(v)
-            //return (v << 16) >> 16;
+          Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+          }
 
           /* VOLTAGE */
           if (voltage === 65535) {
@@ -100,33 +105,6 @@ class solaredgeModbusDevice extends Homey.Device {
           var measureyield = totaal / 100;
           this.setCapabilityValue('measure_yield', measureyield);
 
-          /* OPERATIONAL STATUS
-         if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
-           this.setCapabilityValue('status', Homey.__('Off'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
-         } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && inverterstatus == 2) {
-           this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping (auto-shutdown) – Night mode') }, {});
-         } else if (this.getCapabilityValue('status') != Homey.__('Sleeping (auto-shutdown) – Night mode') && inverterstatus == 3) {
-           this.setCapabilityValue('status', Homey.__('Sleeping (auto-shutdown) – Night mode'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping (auto-shutdown) – Night mode') }, {});
-         } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && inverterstatus == 4) {
-           this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Inverter is ON and producing power') }, {});
-         } else if (this.getCapabilityValue('operational_status') != Homey.__('Production (curtailed)') && inverterstatus == 5) {
-           this.setCapabilityValue('status', Homey.__('Production (curtailed)'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Production (curtailed)') }, {});
-         } else if (this.getCapabilityValue('operational_status') != Homey.__('Shutting down') && inverterstatus == 6) {
-           this.setCapabilityValue('status', Homey.__('Shutting down'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
-         } else if (this.getCapabilityValue('operational_status') != Homey.__('Fault') && inverterstatus == 7) {
-           this.setCapabilityValue('status', Homey.__('Fault'));
-           Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
-         } else if (this.getCapabilityValue('operational_status') != Homey.__('Maintenance/setup') && inverterstatus == 8) {
-         this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
-         Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
-        }
-        */
           //errors
         }).catch((err) => {
           this.log(err);
@@ -142,14 +120,14 @@ class solaredgeModbusDevice extends Homey.Device {
     })
 
     socket.on('close', () => {
-      this.log('Client closed, retrying in 10 seconds');
+      this.log('Client closed, retrying in 63 seconds');
 
       clearInterval(this.pollingInterval);
 
       setTimeout(() => {
         socket.connect(options);
         this.log('Reconnecting now ...');
-      }, 10000)
+      }, 63000)
     })
 
   }
@@ -160,4 +138,4 @@ class solaredgeModbusDevice extends Homey.Device {
 
 }
 
-module.exports = solaredgeModbusDevice;
+module.exports = SolaredgeModbusDevice;

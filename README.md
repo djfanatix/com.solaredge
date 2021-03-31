@@ -38,16 +38,15 @@ Go to the menu by the following steps:
 - To modify the TCP port, select Modbus TCP --> TCP Port, set the port number and long-press Enter
 
 ## Support topic
-For support please use the official support topic on the forum [here](https://community.athom.com/t/45487).
+For support please use the official support topic on the forum [here](https://community.athom.com/t/696).
 
 ## Thanks
 Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where this app is based on.
 
 ## To Do (by priority)
 - Learn to program :-)
-- Create tokens and flows
-- Implement inverter status
-- Implement Battery Storage
+- Implement Inverter STATUS
+- Implement Storage
 - Make a virtual device with some derived data
 - Phase and load monitoring
 
@@ -55,5 +54,7 @@ Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where th
 
 ## Changelog
 
+### v1.0.1
+* Flows and tokens are working
 ### v1.0.0
 * Initial release

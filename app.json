@@ -1,6 +1,6 @@
 {
 	"id": "solaredge.modbus",
-	"sdk": 3,
+	"sdk": 2,
   "brandColor": "#df001c",
 	"name": {
 		"en": "Solaredge Inverters",
@@ -64,6 +64,7 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/total_yield.svg",
+			"insights": true,
       "units": {
         "en": "KWh",
         "nl": "KWh"
@@ -89,6 +90,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/powergrid_feed_in.svg",
       "units": {
         "en": "W",
@@ -104,6 +106,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/home.svg",
       "units": {
         "en": "W",
@@ -119,12 +122,137 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
+			"insights": true,
       "icon": "/assets/powergrid_feed_in.svg",
       "units": {
         "en": "W",
         "nl": "W"
       }
     }
+  },
+	"flow": {
+    "triggers": [
+			{
+		    "id": "changedConsumption",
+				"title": {
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "consumption",
+            "type": "number",
+            "title": {
+              "en": "Consumption",
+              "nl": "Verbruik"
+            },
+            "example": 200
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedStatus",
+				"title": {
+					"en": "Status Changed",
+					"nl": "Status gewijzigd"
+				},
+				"titleFormatted": {
+          "en": "Status changed to [[inverter_status]]",
+          "nl": "Status veranderd naar [[inverter_status]]"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Status",
+              "nl": "Status"
+            },
+            "example": "Fault"
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedExportPower",
+				"title": {
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "export",
+            "type": "number",
+            "title": {
+              "en": "Power Export (W)",
+              "nl": "Power Export (W)"
+            },
+            "example": 303
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedImportPower",
+				"title": {
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "import",
+            "type": "number",
+            "title": {
+              "en": "Power Import (W)",
+              "nl": "Power Import (W)"
+            },
+            "example": 42
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    }
+    ]
   },
 	"drivers": [
 		{
@@ -205,67 +333,5 @@
 				}
 			]
 		}
-	],
-  "flow": {
-    "triggers": [
-      {
-		    "id": "changedStatus",
-				"title": {
-					"en": "Status Changed",
-					"nl": "Status gewijzigd"
-				},
-				"titleFormatted": {
-          "en": "Status changed to [[inverter_status]]",
-          "nl": "Status veranderd naar [[inverter_status]]"
-        },
-        "tokens": [
-          {
-            "name": "status",
-            "type": "string",
-            "title": {
-              "en": "Operational Status",
-              "nl": "Operationele status"
-            },
-            "example": "Fault"
-          }
-        ]
-	    },
-      {
-		    "id": "changedExportPower",
-				"title": {
-					"en": "Power Export Changed (W)",
-					"nl": "Power Export gewijzigd (W)"
-				},
-        "tokens": [
-          {
-            "name": "export",
-            "type": "number",
-            "title": {
-              "en": "Power Export (W)",
-              "nl": "Power Export (W)"
-            },
-            "example": 303
-          }
-        ]
-	    },
-      {
-		    "id": "changedImportPower",
-				"title": {
-					"en": "Power Import Changed (W)",
-					"nl": "Power Import gewijzigd (W)"
-				},
-        "tokens": [
-          {
-            "name": "import",
-            "type": "number",
-            "title": {
-              "en": "Power Import (W)",
-              "nl": "Power Import (W)"
-            },
-            "example": 42
-          }
-        ]
-	    }
-    ]
-  }
+	]
 }
