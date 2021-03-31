@@ -5,7 +5,7 @@ const modbus = require('jsmodbus');
 const net = require('net');
 const socket = new net.Socket();
 
-class solaredgeModbusDevice extends Homey.Device {
+class SolaredgeModbusDevice extends Homey.Device {
 
   onInit() {
 
@@ -120,14 +120,14 @@ class solaredgeModbusDevice extends Homey.Device {
     })
 
     socket.on('close', () => {
-      this.log('Client closed, retrying in 10 seconds');
+      this.log('Client closed, retrying in 63 seconds');
 
       clearInterval(this.pollingInterval);
 
       setTimeout(() => {
         socket.connect(options);
         this.log('Reconnecting now ...');
-      }, 10000)
+      }, 63000)
     })
 
   }
@@ -138,4 +138,4 @@ class solaredgeModbusDevice extends Homey.Device {
 
 }
 
-module.exports = solaredgeModbusDevice;
+module.exports = SolaredgeModbusDevice;
