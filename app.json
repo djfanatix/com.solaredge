@@ -149,6 +149,17 @@
             "example": 200
           }
         ]
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
 	    },
       {
 		    "id": "changedStatus",
