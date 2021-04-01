@@ -1,7 +1,7 @@
 {
   "name": "solaredge.modbus",
-  "version": "1.0.0",
-  "description": "Monitor Solaredge inverters over modbus protocol",
+  "version": "1.0.3",
+  "description": "Monitor SolarEdge inverters over modbus protocol",
   "main": "app.js",
   "dependencies": {
     "jsmodbus": "^3.1.4",

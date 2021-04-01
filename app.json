@@ -3,14 +3,14 @@
 	"sdk": 2,
   "brandColor": "#df001c",
 	"name": {
-		"en": "Solaredge",
-		"nl": "Solaredge"
+		"en": "SolarEdge",
+		"nl": "SolarEdge"
 	},
 	"tags": {
 		"en": [ "solaredge", "inverter", "solar"],
 		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
 	},
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"compatibility": ">=5.0.0",
 	"author": {
 		"name": "Pieter Verougstraete",
@@ -42,13 +42,13 @@
 	},
   "homeyCommunityTopicId": 45487,
 	"images": {
-		"large": "./assets/images/large.png",
-		"small": "./assets/images/small.png"
+		"large": "./assets/images/large.jpg",
+		"small": "./assets/images/small.jpg"
 	},
 	"category": "energy",
 	"description": {
-		"en": "Monitor Solaredge inverters over modbus protocol",
-		"nl": "Monitor Solaredge omvormers via modbus protocol"
+		"en": "Monitor SolarEdge inverters over modbus protocol",
+		"nl": "Monitor SolarEdge omvormers via modbus protocol"
 	},
 	"dependencies": {
 		"net": "*"
@@ -172,8 +172,8 @@
 					"nl": "Status gewijzigd"
 				},
 				"titleFormatted": {
-          "en": "Status changed to [[inverter_status]]",
-          "nl": "Status veranderd naar [[inverter_status]]"
+          "en": "Status changed",
+          "nl": "Status veranderd"
         },
         "tokens": [
           {
