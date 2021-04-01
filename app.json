@@ -10,7 +10,7 @@
 		"en": [ "solaredge", "inverter", "solar"],
 		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
 	},
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"compatibility": ">=3.0.0",
 	"author": {
 		"name": "Pieter Verougstraete",

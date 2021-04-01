@@ -52,6 +52,10 @@ Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where th
 
 ## Changelog
 
+### v1.0.4
+* Bugfixes + older homeys
+### v1.0.3
+* Bugfixes
 ### v1.0.2
 * Inverter status implementation + rounding values
 ### v1.0.1
