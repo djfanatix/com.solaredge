@@ -25,7 +25,7 @@ class SolaredgeModbusDevice extends Homey.Device {
       'logEnabled': true
     }
 
-    let client = new modbus.client.TCP(socket)
+    let client = new modbus.client.TCP(socket, 2)
 
     //register flowCards
 
