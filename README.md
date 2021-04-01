@@ -39,6 +39,10 @@ Go to the menu by the following steps:
 ## Support topic
 For support please use the official support topic on the forum [here](https://community.athom.com/t/app-SolarEdge/45487).
 
+## Donations
+If you appreciate the app: [Buy me a Beer](https://www.paypal.com/paypalme/pieterverougstraete)]
+@athom a Homey Pro is always appreciated :-)
+
 ## Thanks
 Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where this app is based on.
 
@@ -47,7 +51,8 @@ Thanks to Richard Barkestam and Jelger Haanstra for the SMA Energy app, where th
 - Implement Storage
 - Make a virtual device with some derived data
 - Phase and load monitoring
-
+- For Belgium users: Make calculations for the capacity tariff in 2022.
+- Tariff calculations
 
 
 ## Changelog
