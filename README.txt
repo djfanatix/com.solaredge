@@ -1,4 +1,4 @@
- Homey app to receive realtime data from your SolarEdge solar installation using local Modbus TCP
+Homey app to receive realtime data from your SolarEdge solar installation using local Modbus TCP
 
 Purpose
 The difference of this app and the already existing solar panels app is that this app reads the data directly from the inverter.
