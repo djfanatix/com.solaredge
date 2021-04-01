@@ -11,7 +11,7 @@
 		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
 	},
 	"version": "1.0.3",
-	"compatibility": ">=5.0.0",
+	"compatibility": ">=3.0.0",
 	"author": {
 		"name": "Pieter Verougstraete",
 		"email": "pieter.Verougstraete@gmail.com",
