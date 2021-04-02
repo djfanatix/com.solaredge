@@ -134,8 +134,8 @@ class SolaredgeModbusDevice extends Homey.Device {
             this.setCapabilityValue('status', Homey.__('Fault'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Maintenance/setup') && inverterstatus == 8) {
-          this.setCapabilityValue('status', Homey.__('Maintenance/setup'));
-          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance/setup') }, {});
+          this.setCapabilityValue('status', Homey.__('Maintenance'));
+          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance') }, {});
           }
 
           //errors
