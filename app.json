@@ -10,7 +10,7 @@
 		"en": [ "solaredge", "inverter", "solar"],
 		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
 	},
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"compatibility": ">=3.0.0",
 	"author": {
 		"name": "Pieter Verougstraete",
@@ -340,6 +340,16 @@
 							"label": {
 								"en": "Polling",
 								"nl": "Polling"
+							}
+						},
+						{
+							"id": "deviceid",
+							"type": "number",
+							"value": 1,
+							"step": 1,
+							"label": {
+								"en": "Device ID (default = 1)",
+								"nl": "Device ID (default = 1)"
 							}
 						}
 					]

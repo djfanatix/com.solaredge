@@ -76,7 +76,7 @@ $(function() {
   }
 </style>
 
-<p data-i18n="pair.intro">Enter the IP address and port of your Solaredge Inverter, set the polling frequency and the device ID (default=1). </p>
+<p data-i18n="pair.intro">Enter the IP address and port of your Solaredge Inverter and set the polling frequency. </p>
 <div class="solaredge-pairing">
   <div class="form-group">
     <label for="address" data-i18n="pair.address">IP address</label>
@@ -89,10 +89,6 @@ $(function() {
   <div class="form-group">
   	<label for="polling" data-i18n="pair.polling">Polling Frequency</label>
   	<input type="number" class="form-control" id="polling" min="2" max="3600" placeholder="20" value="20" required>
-  </div>
-	<div class="form-group">
-  	<label for="deviceid" data-i18n="pair.deviceid">Device ID</label>
-  	<input type="number" class="form-control" id="deviceid" min="0" max="10" placeholder="1" value="1" required>
   </div>
   <div class="form-group buttons">
     <button id="connect" class="button" data-i18n="pair.connect">Connect</button>

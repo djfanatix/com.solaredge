@@ -12,11 +12,10 @@ class SolaredgeModbusDevice extends Homey.Device {
     if (this.getClass() !== 'solarpanel') {
       this.setClass('solarpanel');
     }
-
+    var deviceid = this.getSetting('deviceid');
     let options = {
       'host': this.getSetting('address'),
       'port': this.getSetting('port'),
-      'deviceid': this.getSetting('deviceid'),
       'unitId': 3,
       'timeout': 5000,
       'autoReconnect': true,
@@ -29,7 +28,7 @@ class SolaredgeModbusDevice extends Homey.Device {
     let client = new modbus.client.TCP(socket, deviceid)
 
     //register flowCards
-
+    this.log(deviceid)
 
     socket.connect(options);
 
