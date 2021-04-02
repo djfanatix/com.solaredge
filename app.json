@@ -70,6 +70,36 @@
         "nl": "KWh"
       }
     },
+		"battery_capacity": {
+			"type": "number",
+			"title": {
+				"en": "Battery Capacity",
+				"nl": "Batterij capaciteit"
+			},
+			"getable": true,
+			"setable": false,
+			"uiComponent": "sensor",
+			"icon": "/assets/battery_capacity.svg",
+			"units": {
+				"en": "%",
+				"nl": "%"
+			}
+		},
+		"battery": {
+      "type": "number",
+      "title": {
+        "en": "Battery Charge",
+        "nl": "Batterij lading"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/battery.svg",
+      "units": {
+        "en": "%",
+        "nl": "%"
+      }
+    },
     "status": {
       "type": "string",
       "title": {
@@ -162,6 +192,93 @@
               "nl": "Selecteer Inverter"
             },
             "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+			{
+		    "id": "changedBattery",
+				"title": {
+					"en": "Battery Charge Changed",
+					"nl": "Batterij lading gewijzigd"
+				},
+        "tokens": [
+          {
+            "name": "charge",
+            "type": "number",
+            "title": {
+              "en": "Battery Charge (%)",
+              "nl": "Batterij lading (%)"
+            },
+            "example": 66
+          }
+        ],
+	      "args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select StorEdge",
+              "nl": "Selecteer StorEdge"
+            },
+            "filter": "driver_id=storedge"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedBatteryCharging",
+				"title": {
+					"en": "Battery Charging Changed (W)",
+					"nl": "Batterij opladen gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "charging",
+            "type": "number",
+            "title": {
+              "en": "Battery Charging (W)",
+              "nl": "Batterij opladen (W)"
+            },
+            "example": 1337
+          }
+        ],
+	      "args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select StorEdge",
+              "nl": "Selecteer  StorEdge"
+            },
+            "filter": "driver_id=storedge"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedBatteryDischarging",
+				"title": {
+					"en": "Battery Discharging Changed (W)",
+					"nl": "Batterij ontladen gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "discharging",
+            "type": "number",
+            "title": {
+              "en": "Battery Discharging (W)",
+              "nl": "Batterij ontladen (W)"
+            },
+            "example": 187
+          }
+        ],
+	      "args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select StorEdge",
+              "nl": "Selecteer  StorEdge"
+            },
+            "filter": "driver_id=storedge"
 	        }
 	      ]
 	    },
@@ -268,6 +385,88 @@
   },
 	"drivers": [
 		{
+			"id": "Storedge",
+			"name": {
+				"en": "StorEdge",
+				"nl": "StorEdge"
+			},
+			"images": {
+				"large": "drivers/inverter/assets/images/large.jpg",
+				"small": "drivers/inverter/assets/images/small.jpg"
+			},
+			"class": "sensor",
+			"capabilities": [
+        "status",
+        "battery",
+        "measure_power.charge",
+        "measure_power.discharge",
+        "battery_capacity"
+			],
+      "capabilitiesOptions": {
+        "measure_power.charge": {
+          "title": {
+            "en": "Charge",
+            "nl": "Opladen"
+          }
+        },
+        "measure_power.discharge": {
+          "title": {
+            "en": "Discharge",
+            "nl": "Ontladen"
+          }
+        }
+      },
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+			"settings": [
+				{
+					"type": "group",
+					"label": {
+						"en": "StorEdge settings",
+						"nl": "StorEdge instellingen"
+					},
+					"children": [
+						{
+							"id": "address",
+							"type": "text",
+							"value": "0.0.0.0",
+							"label": {
+								"en": "IP Address",
+								"nl": "IP adres"
+							}
+						},
+						{
+							"id": "port",
+							"type": "number",
+							"value": 502,
+							"step": 1,
+							"label": {
+								"en": "Port",
+								"nl": "Poort"
+							}
+						},
+						{
+							"id": "polling",
+							"type": "number",
+							"value": 5,
+							"step": 1,
+							"attr": {
+								"min": 2,
+								"max": 3600
+							},
+							"label": {
+								"en": "Polling",
+								"nl": "Polling"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
 			"id": "inverter",
 			"name": {
 				"en": "Solaredge Inverters",
@@ -293,6 +492,89 @@
           "title": {
             "en": "Solar Power",
             "nl": "Solar Power"
+          }
+        }
+      },
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+			"settings": [
+				{
+					"type": "group",
+					"label": {
+						"en": "Inverter settings",
+						"nl": "Omvormer instellingen"
+					},
+					"children": [
+						{
+							"id": "address",
+							"type": "text",
+							"value": "0.0.0.0",
+							"label": {
+								"en": "IP Address",
+								"nl": "IP adres"
+							}
+						},
+						{
+							"id": "port",
+							"type": "number",
+							"value": 502,
+							"step": 1,
+							"label": {
+								"en": "Port",
+								"nl": "Poort"
+							}
+						},
+						{
+							"id": "polling",
+							"type": "number",
+							"value": 5,
+							"step": 1,
+							"attr": {
+								"min": 2,
+								"max": 3600
+							},
+							"label": {
+								"en": "Polling",
+								"nl": "Polling"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "inverterwithoutmeter",
+			"name": {
+				"en": "Inverter without meter",
+				"nl": "Omvormer zonder meter"
+			},
+			"images": {
+				"large": "drivers/inverter/assets/images/large.jpg",
+				"small": "drivers/inverter/assets/images/small.jpg"
+			},
+			"class": "solarpanel",
+			"capabilities": [
+        "measure_power",
+				"measure_voltage",
+        "meter_power",
+				"status"
+			],
+      "capabilitiesOptions": {
+        "measure_power": {
+					"icon": "/assets/sun.svg",
+          "title": {
+            "en": "Solar Power",
+            "nl": "Solar Power"
+          }
+        },
+				"meter_power": {
+					"icon": "/assets/sun.svg",
+          "title": {
+						"en": "Total Yield",
+		        "nl": "Totale opbrengst"
           }
         }
       },

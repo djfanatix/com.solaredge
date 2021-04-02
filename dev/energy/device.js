@@ -25,7 +25,7 @@ class SolaredgeModbusDevice extends Homey.Device {
       'logEnabled': true
     }
 
-    let client = new modbus.client.TCP(socket, 2)
+    let client = new modbus.client.TCP(socket)
 
     //register flowCards
 
@@ -115,18 +115,18 @@ class SolaredgeModbusDevice extends Homey.Device {
           if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
             this.setCapabilityValue('status', Homey.__('Off'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
-          } else if (this.getCapabilityValue('status') != Homey.__('Sleeping') && inverterstatus == 2) {
-            this.setCapabilityValue('status', Homey.__('Sleeping'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping') }, {});
-          } else if (this.getCapabilityValue('status') != Homey.__('Starting') && inverterstatus == 3) {
-            this.setCapabilityValue('status', Homey.__('Starting'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Starting') }, {});
-          } else if (this.getCapabilityValue('status') != Homey.__('Production') && inverterstatus == 4) {
+          } else if (this.getCapabilityValue('status') != Homey.__('Standby') && inverterstatus == 2) {
+            this.setCapabilityValue('status', Homey.__('Standby'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Standby') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Grid Monitoring_wake-up') && inverterstatus == 3) {
+            this.setCapabilityValue('status', Homey.__('Grid Monitoring_wake-up'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Grid Monitoring_wake-up') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Inverter is ON and producing power') && inverterstatus == 4) {
+            this.setCapabilityValue('status', Homey.__('Inverter is ON and producing power'));
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Inverter is ON and producing power') }, {});
+          } else if (this.getCapabilityValue('status') != Homey.__('Production') && inverterstatus == 5) {
             this.setCapabilityValue('status', Homey.__('Production'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Production') }, {});
-          } else if (this.getCapabilityValue('status') != Homey.__('Throttled Production') && inverterstatus == 5) {
-            this.setCapabilityValue('status', Homey.__('Throttled Production'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Throttled Production') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Shutting down') && inverterstatus == 6) {
             this.setCapabilityValue('status', Homey.__('Shutting down'));
             Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
