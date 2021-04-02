@@ -7,8 +7,5 @@
   },
   "1.0.4": {
     "en": "bugfixes"
-  },
-  "1.0.5": {
-    "en": "bugfixes for TCP connection"
   }
 }

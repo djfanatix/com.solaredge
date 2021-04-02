@@ -1,0 +1,350 @@
+{
+	"id": "solaredge.modbus",
+	"sdk": 2,
+  "brandColor": "#df001c",
+	"name": {
+		"en": "SolarEdge",
+		"nl": "SolarEdge"
+	},
+	"tags": {
+		"en": [ "solaredge", "inverter", "solar"],
+		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
+	},
+	"version": "1.0.5",
+	"compatibility": ">=3.0.0",
+	"author": {
+		"name": "Pieter Verougstraete",
+		"email": "pieter.Verougstraete@gmail.com",
+		"website": "https://github.com/djfanatix/com.solaredge"
+	},
+	"contributors": {
+    "developers": [
+      {
+        "name": "Richard Barkestam",
+        "email": "richard@barkestam.se"
+      },
+      {
+        "name": "Jelger Haanstra",
+        "email": "homey@solidewebservices.com"
+      }
+    ]
+  },
+	"contributing": {
+	 "donate": {
+		 "paypal": {
+			 "username": "pieterverougstraete",
+			 "currency": "EUR"
+		 }
+	 }
+ },
+	"bugs": {
+		"url": "https://github.com/djfanatix/com.solaredge/issues"
+	},
+  "homeyCommunityTopicId": 45487,
+	"images": {
+		"large": "./assets/images/large.jpg",
+		"small": "./assets/images/small.jpg"
+	},
+	"category": "energy",
+	"description": {
+		"en": "Monitor SolarEdge inverters over modbus protocol",
+		"nl": "Monitor SolarEdge omvormers via modbus protocol"
+	},
+	"dependencies": {
+		"net": "*"
+	},
+  "capabilities": {
+    "measure_yield": {
+      "type": "number",
+      "title": {
+        "en": "Total Yield",
+        "nl": "Totale opbrengst"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/total_yield.svg",
+			"insights": true,
+      "units": {
+        "en": "KWh",
+        "nl": "KWh"
+      }
+    },
+    "status": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/operational_status.svg"
+    },
+    "powergrid_import": {
+      "type": "number",
+      "title": {
+        "en": "Power Import",
+        "nl": "Power Import"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+			"insights": true,
+      "icon": "/assets/powergrid_feed_in.svg",
+      "units": {
+        "en": "W",
+        "nl": "W"
+      }
+    },
+		"ownconsumption": {
+      "type": "number",
+      "title": {
+        "en": "Consumption",
+        "nl": "Verbruik"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+			"insights": true,
+      "icon": "/assets/home.svg",
+      "units": {
+        "en": "W",
+        "nl": "W"
+      }
+    },
+    "powergrid_export": {
+      "type": "number",
+      "title": {
+        "en": "Power Export",
+        "nl": "Power Export"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+			"insights": true,
+      "icon": "/assets/powergrid_feed_in.svg",
+      "units": {
+        "en": "W",
+        "nl": "W"
+      }
+    }
+  },
+	"flow": {
+    "triggers": [
+			{
+		    "id": "changedConsumption",
+				"title": {
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
+				},
+				"titleFormatted": {
+					"en": "Consumption Changed (W)",
+					"nl": "Verbruik gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "consumption",
+            "type": "number",
+            "title": {
+              "en": "Consumption",
+              "nl": "Verbruik"
+            },
+            "example": 200
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedStatus",
+				"title": {
+					"en": "Status Changed",
+					"nl": "Status gewijzigd"
+				},
+				"titleFormatted": {
+          "en": "Status changed",
+          "nl": "Status veranderd"
+        },
+        "tokens": [
+          {
+            "name": "status",
+            "type": "string",
+            "title": {
+              "en": "Status",
+              "nl": "Status"
+            },
+            "example": "Fault"
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedExportPower",
+				"title": {
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
+				},
+				"titleFormatted": {
+					"en": "Power Export Changed (W)",
+					"nl": "Power Export gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "export",
+            "type": "number",
+            "title": {
+              "en": "Power Export (W)",
+              "nl": "Power Export (W)"
+            },
+            "example": 303
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    },
+      {
+		    "id": "changedImportPower",
+				"title": {
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
+				},
+				"titleFormatted": {
+					"en": "Power Import Changed (W)",
+					"nl": "Power Import gewijzigd (W)"
+				},
+        "tokens": [
+          {
+            "name": "import",
+            "type": "number",
+            "title": {
+              "en": "Power Import (W)",
+              "nl": "Power Import (W)"
+            },
+            "example": 42
+          }
+        ],
+				"args": [
+	        {
+            "name": "device",
+            "type": "device",
+            "placeholder": {
+              "en": "Select Inverter",
+              "nl": "Selecteer Inverter"
+            },
+            "filter": "driver_id=inverter"
+	        }
+	      ]
+	    }
+    ]
+  },
+	"drivers": [
+		{
+			"id": "inverter",
+			"name": {
+				"en": "Solaredge Inverters",
+				"nl": "Solaredge Omvormer"
+			},
+			"images": {
+				"large": "drivers/inverter/assets/images/large.jpg",
+				"small": "drivers/inverter/assets/images/small.jpg"
+			},
+			"class": "solarpanel",
+			"capabilities": [
+        "measure_power",
+				"ownconsumption",
+				"powergrid_import",
+				"powergrid_export",
+				"measure_voltage",
+        "measure_yield",
+				"status"
+			],
+      "capabilitiesOptions": {
+        "measure_power": {
+					"icon": "/assets/sun.svg",
+          "title": {
+            "en": "Solar Power",
+            "nl": "Solar Power"
+          }
+        }
+      },
+			"pair": [
+				{
+					"id": "start"
+				}
+			],
+			"settings": [
+				{
+					"type": "group",
+					"label": {
+						"en": "Inverter settings",
+						"nl": "Omvormer instellingen"
+					},
+					"children": [
+						{
+							"id": "address",
+							"type": "text",
+							"value": "0.0.0.0",
+							"label": {
+								"en": "IP Address",
+								"nl": "IP adres"
+							}
+						},
+						{
+							"id": "port",
+							"type": "number",
+							"value": 502,
+							"step": 1,
+							"label": {
+								"en": "Port",
+								"nl": "Poort"
+							}
+						},
+						{
+							"id": "polling",
+							"type": "number",
+							"value": 5,
+							"step": 1,
+							"attr": {
+								"min": 2,
+								"max": 3600
+							},
+							"label": {
+								"en": "Polling",
+								"nl": "Polling"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
