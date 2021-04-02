@@ -2,10 +2,11 @@
   "pair": {
     "title": "Add Solaredge Inverter",
     "nosettings": "Please fill in all the required fields.",
-    "intro": "Enter the IP address, port number and polling frequentie of your Solaredge inverter.",
+    "intro": "Enter the IP address and port of your Solaredge Inverter, set the polling frequency and the device ID (default=1).",
     "address": "IP Address",
     "port": "Port",
     "polling": "Polling Frequency",
+    "deviceid": "Device ID",
     "connect": "Connect"
   },
   "Unreachable": "Unreachable",

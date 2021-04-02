@@ -16,6 +16,7 @@ class SolaredgeModbusDevice extends Homey.Device {
     let options = {
       'host': this.getSetting('address'),
       'port': this.getSetting('port'),
+      'deviceid': this.getSetting('deviceid'),
       'unitId': 3,
       'timeout': 5000,
       'autoReconnect': true,
@@ -25,7 +26,7 @@ class SolaredgeModbusDevice extends Homey.Device {
       'logEnabled': true
     }
 
-    let client = new modbus.client.TCP(socket, 2)
+    let client = new modbus.client.TCP(socket, deviceid)
 
     //register flowCards
 
