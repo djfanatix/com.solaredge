@@ -10,7 +10,7 @@
 		"en": [ "solaredge", "inverter", "solar"],
 		"nl": [ "Solaredge", "omvormer", "zonnepanelen"]
 	},
-	"version": "1.0.4",
+	"version": "1.1.5",
 	"compatibility": ">=3.0.0",
 	"author": {
 		"name": "Pieter Verougstraete",
@@ -54,17 +54,35 @@
 		"net": "*"
 	},
   "capabilities": {
-    "measure_yield": {
+    "total_export": {
       "type": "number",
       "title": {
-        "en": "Total Yield",
-        "nl": "Totale opbrengst"
+        "en": "Total export",
+        "nl": "Totale export"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/total_yield.svg",
 			"insights": true,
+			"decimals": 2,
+      "units": {
+        "en": "KWh",
+        "nl": "KWh"
+      }
+    },
+		"total_import": {
+      "type": "number",
+      "title": {
+        "en": "Total Import",
+        "nl": "Totale Import"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/total_yield.svg",
+			"insights": true,
+			"decimals": 2,
       "units": {
         "en": "KWh",
         "nl": "KWh"
@@ -111,6 +129,17 @@
       "uiComponent": "sensor",
       "icon": "/assets/operational_status.svg"
     },
+		"batterystatus": {
+			"type": "string",
+			"title": {
+				"en": "Status",
+				"nl": "Status"
+			},
+			"getable": true,
+			"setable": false,
+			"uiComponent": "sensor",
+			"icon": "/assets/operational_status.svg"
+		},
     "powergrid_import": {
       "type": "number",
       "title": {
@@ -385,18 +414,18 @@
   },
 	"drivers": [
 		{
-			"id": "Storedge",
+			"id": "storedge",
 			"name": {
-				"en": "StorEdge",
-				"nl": "StorEdge"
+				"en": "StorEdge battery",
+				"nl": "StorEdge batterij"
 			},
 			"images": {
-				"large": "drivers/inverter/assets/images/large.jpg",
-				"small": "drivers/inverter/assets/images/small.jpg"
+				"large": "drivers/storedge/assets/images/large.png",
+				"small": "drivers/storedge/assets/images/small.png"
 			},
 			"class": "sensor",
 			"capabilities": [
-        "status",
+        "batterystatus",
         "battery",
         "measure_power.charge",
         "measure_power.discharge",
@@ -417,10 +446,18 @@
         }
       },
 			"pair": [
-				{
-					"id": "start"
-				}
-			],
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
 			"settings": [
 				{
 					"type": "group",
@@ -429,25 +466,6 @@
 						"nl": "StorEdge instellingen"
 					},
 					"children": [
-						{
-							"id": "address",
-							"type": "text",
-							"value": "0.0.0.0",
-							"label": {
-								"en": "IP Address",
-								"nl": "IP adres"
-							}
-						},
-						{
-							"id": "port",
-							"type": "number",
-							"value": 502,
-							"step": 1,
-							"label": {
-								"en": "Port",
-								"nl": "Poort"
-							}
-						},
 						{
 							"id": "polling",
 							"type": "number",
@@ -482,85 +500,13 @@
 				"ownconsumption",
 				"powergrid_import",
 				"powergrid_export",
-				"measure_voltage",
-        "measure_yield",
-				"status"
-			],
-      "capabilitiesOptions": {
-        "measure_power": {
-					"icon": "/assets/sun.svg",
-          "title": {
-            "en": "Solar Power",
-            "nl": "Solar Power"
-          }
-        }
-      },
-			"pair": [
-				{
-					"id": "start"
-				}
-			],
-			"settings": [
-				{
-					"type": "group",
-					"label": {
-						"en": "Inverter settings",
-						"nl": "Omvormer instellingen"
-					},
-					"children": [
-						{
-							"id": "address",
-							"type": "text",
-							"value": "0.0.0.0",
-							"label": {
-								"en": "IP Address",
-								"nl": "IP adres"
-							}
-						},
-						{
-							"id": "port",
-							"type": "number",
-							"value": 502,
-							"step": 1,
-							"label": {
-								"en": "Port",
-								"nl": "Poort"
-							}
-						},
-						{
-							"id": "polling",
-							"type": "number",
-							"value": 5,
-							"step": 1,
-							"attr": {
-								"min": 2,
-								"max": 3600
-							},
-							"label": {
-								"en": "Polling",
-								"nl": "Polling"
-							}
-						}
-					]
-				}
-			]
-		},
-		{
-			"id": "inverterwithoutmeter",
-			"name": {
-				"en": "Inverter without meter",
-				"nl": "Omvormer zonder meter"
-			},
-			"images": {
-				"large": "drivers/inverter/assets/images/large.jpg",
-				"small": "drivers/inverter/assets/images/small.jpg"
-			},
-			"class": "solarpanel",
-			"capabilities": [
-        "measure_power",
-				"measure_voltage",
+				"status",
         "meter_power",
-				"status"
+				"meter_power.export",
+				"meter_power.import",
+				"measure_voltage.meter",
+				"measure_voltage.dc",
+				"measure_temperature"
 			],
       "capabilitiesOptions": {
         "measure_power": {
@@ -576,6 +522,41 @@
 						"en": "Total Yield",
 		        "nl": "Totale opbrengst"
           }
+        },
+				"measure_voltage.dc": {
+					"icon": "/assets/sun.svg",
+          "title": {
+						"en": "DC Voltage",
+		        "nl": "DC Voltage"
+          }
+        },
+				"measure_voltage.meter": {
+					"icon": "/assets/sun.svg",
+          "title": {
+						"en": "AC Voltage",
+		        "nl": "AC Voltage"
+          }
+        },
+				"measure_temperature": {
+					"icon": "/assets/sun.svg",
+					"title": {
+						"en": "Heatsink temperature",
+						"nl": "Heatsink temperatuur"
+					}
+				},
+				"meter_power.import": {
+					"icon": "/assets/sun.svg",
+          "title": {
+						"en": "Total Import",
+		        "nl": "Totale Import"
+          }
+        },
+				"meter_power.export": {
+					"icon": "/assets/sun.svg",
+          "title": {
+						"en": "Total Export",
+		        "nl": "Totale Export"
+          }
         }
       },
 			"pair": [
@@ -622,6 +603,24 @@
 							"label": {
 								"en": "Polling",
 								"nl": "Polling"
+							}
+						},
+						{
+							"id": "meter",
+							"type": "checkbox",
+							"value": false,
+							"label": {
+								"en": "Energy meter installed?",
+								"nl": "Energy meter installed?"
+							}
+						},
+						{
+							"id": "storedge",
+							"type": "checkbox",
+							"value": false,
+							"label": {
+								"en": "StorEdge Battery installed?",
+								"nl": "StorEdge Battery installed?"
 							}
 						}
 					]
