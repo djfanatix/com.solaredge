@@ -11,7 +11,7 @@
   },
   "Unreachable": "Onbereikbaar",
   "Off": "Uit",
-  "Standby": "Batterij standby",
+  "BatteryStandby": "Batterij standby",
   "Charge": "Batterij opladen",
   "Discharge": "Batterij ontladen",
   "NA": "Informatie niet beschikbaar"

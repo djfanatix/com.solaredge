@@ -11,6 +11,10 @@ class SolaredgeModbusApp extends Homey.App {
     new Homey.FlowCardTriggerDevice('changedStatus').register();
     new Homey.FlowCardTriggerDevice('changedExportPower').register();
     new Homey.FlowCardTriggerDevice('changedImportPower').register();
+//    new Homey.FlowCardTriggerDevice('changedBattery').register();
+//    new Homey.FlowCardTriggerDevice('changedBatteryCharging').register();
+//    new Homey.FlowCardTriggerDevice('changedBatteryDischarging').register();
+//    new Homey.FlowCardTriggerDevice('changedBatteryCapacity').register();
       }
 }
 

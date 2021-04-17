@@ -5,13 +5,22 @@
   "1.0.3": {
     "en": "bugfixes"
   },
-  "1.0.4": {
-    "en": "bugfixes"
+  "1.1.0": {
+    "en": "rewrite app, bugfixes"
   },
-  "1.0.5": {
-    "en": "bugfixes for TCP connection"
+  "1.1.1": {
+    "en": "app rewrite + bugfixes"
   },
-  "1.0.6": {
-    "en": "bugfixes + choose device ID"
+  "1.1.2": {
+    "en": "app rewrite + bugfixes"
+  },
+  "1.1.3": {
+    "en": "app rewrite + bugfixes"
+  },
+  "1.1.4": {
+    "en": "Heatsink temperature and DC power"
+  },
+  "1.1.5": {
+    "en": "fix for 3-phase inverters"
   }
 }
