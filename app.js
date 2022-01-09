@@ -7,14 +7,22 @@ class SolaredgeModbusApp extends Homey.App {
   onInit() {
     this.log('Initializing Solaredge Modbus app ...');
     this.log('Registering flows');
+    //Inverter 1
     new Homey.FlowCardTriggerDevice('changedConsumption').register();
     new Homey.FlowCardTriggerDevice('changedStatus').register();
     new Homey.FlowCardTriggerDevice('changedExportPower').register();
     new Homey.FlowCardTriggerDevice('changedImportPower').register();
-//    new Homey.FlowCardTriggerDevice('changedBattery').register();
-//    new Homey.FlowCardTriggerDevice('changedBatteryCharging').register();
-//    new Homey.FlowCardTriggerDevice('changedBatteryDischarging').register();
-//    new Homey.FlowCardTriggerDevice('changedBatteryCapacity').register();
+    //Inverter 2
+    new Homey.FlowCardTriggerDevice('changedConsumption1').register();
+    new Homey.FlowCardTriggerDevice('changedStatus1').register();
+    new Homey.FlowCardTriggerDevice('changedExportPower1').register();
+    new Homey.FlowCardTriggerDevice('changedImportPower1').register();
+    //Batterij
+    new Homey.FlowCardTriggerDevice('changedbatStatus').register();
+    new Homey.FlowCardTriggerDevice('changedBattery').register();
+    new Homey.FlowCardTriggerDevice('changedBatteryCharging').register();
+    new Homey.FlowCardTriggerDevice('changedBatteryDischarging').register();
+    //new Homey.FlowCardTriggerDevice('changedBatteryCapacity').register();
       }
 }
 

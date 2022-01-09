@@ -18,7 +18,7 @@
       "zonnepanelen"
     ]
   },
-  "version": "1.4.6",
+  "version": "1.3.0",
   "compatibility": ">=3.0.0",
   "author": {
     "name": "Pieter Verougstraete",
@@ -267,15 +267,9 @@
                 }
               },
               {
-                "id": "2",
-                "label": {
-                  "en": "Time of Use (Profile)"
-                }
-              },
-              {
                 "id": "3",
                 "label": {
-                  "en": "Backup"
+                  "en": "Time of Use (Profile)"
                 }
               },
               {
@@ -516,39 +510,6 @@
         ]
       },
       {
-        "id": "changedConsumption1",
-        "title": {
-          "en": "Consumption Changed",
-          "nl": "Verbruik gewijzigd"
-        },
-        "titleFormatted": {
-          "en": "Consumption Changed",
-          "nl": "Verbruik gewijzigd"
-        },
-        "tokens": [
-          {
-            "name": "consumption",
-            "type": "number",
-            "title": {
-              "en": "Consumption",
-              "nl": "Verbruik"
-            },
-            "example": 200
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Inverter",
-              "nl": "Selecteer Inverter"
-            },
-            "filter": "driver_id=invertermultiple"
-          }
-        ]
-      },
-      {
         "id": "changedBattery",
         "title": {
           "en": "Battery Charge Changed",
@@ -644,39 +605,6 @@
               "nl": "Selecteer  StorEdge"
             },
             "filter": "driver_id=storedge"
-          }
-        ]
-      },
-      {
-        "id": "changedStatus1",
-        "title": {
-          "en": "Status Changed",
-          "nl": "Status gewijzigd"
-        },
-        "titleFormatted": {
-          "en": "Status changed",
-          "nl": "Status veranderd"
-        },
-        "tokens": [
-          {
-            "name": "status",
-            "type": "string",
-            "title": {
-              "en": "Status",
-              "nl": "Status"
-            },
-            "example": "Fault"
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Inverter",
-              "nl": "Selecteer Inverter"
-            },
-            "filter": "driver_id=invertermultiple"
           }
         ]
       },
@@ -780,72 +708,6 @@
         ]
       },
       {
-        "id": "changedExportPower1",
-        "title": {
-          "en": "Power Export Changed (W)",
-          "nl": "Power Export gewijzigd (W)"
-        },
-        "titleFormatted": {
-          "en": "Power Export Changed (W)",
-          "nl": "Power Export gewijzigd (W)"
-        },
-        "tokens": [
-          {
-            "name": "export",
-            "type": "number",
-            "title": {
-              "en": "Power Export (W)",
-              "nl": "Power Export (W)"
-            },
-            "example": 303
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Inverter",
-              "nl": "Selecteer Inverter"
-            },
-            "filter": "driver_id=invertermultiple"
-          }
-        ]
-      },
-      {
-        "id": "changedImportPower1",
-        "title": {
-          "en": "Power Import Changed (W)",
-          "nl": "Power Import gewijzigd (W)"
-        },
-        "titleFormatted": {
-          "en": "Power Import Changed (W)",
-          "nl": "Power Import gewijzigd (W)"
-        },
-        "tokens": [
-          {
-            "name": "import",
-            "type": "number",
-            "title": {
-              "en": "Power Import (W)",
-              "nl": "Power Import (W)"
-            },
-            "example": 42
-          }
-        ],
-        "args": [
-          {
-            "name": "device",
-            "type": "device",
-            "placeholder": {
-              "en": "Select Inverter",
-              "nl": "Selecteer Inverter"
-            },
-            "filter": "driver_id=invertermultiple"
-          }
-        ]
-      },
-      {
         "id": "changedImportPower",
         "title": {
           "en": "Power Import Changed (W)",
@@ -886,11 +748,6 @@
       "name": {
         "en": "StorEdge battery",
         "nl": "StorEdge batterij"
-      },
-      "energy": {
-        "batteries": [
-          "OTHER"
-        ]
       },
       "images": {
         "large": "drivers/storedge/assets/images/large.png",
@@ -974,184 +831,6 @@
               "label": {
                 "en": "Polling",
                 "nl": "Polling"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "invertermultiple",
-      "name": {
-        "en": "Solaredge Multiple inverters",
-        "nl": "Solaredge MeerderenOmvormers"
-      },
-      "images": {
-        "large": "drivers/invertermultiple/assets/images/large.jpg",
-        "small": "drivers/invertermultiple/assets/images/small.jpg"
-      },
-      "class": "solarpanel",
-      "capabilities": [
-        "measure_power",
-        "ownconsumption",
-        "powergrid_import",
-        "powergrid_export",
-        "status",
-        "meter_power",
-        "meter_power.export",
-        "meter_power.import",
-        "measure_voltage.meter",
-        "measure_voltage.dc",
-        "measure_temperature",
-        "measure_power.ac"
-      ],
-      "capabilitiesOptions": {
-        "measure_power": {
-          "icon": "/assets/sun.svg",
-          "decimals": 0,
-          "title": {
-            "en": "Solar Power",
-            "nl": "Solar Power"
-          }
-        },
-        "measure_power.ac": {
-          "icon": "/assets/sun.svg",
-          "decimals": 0,
-          "title": {
-            "en": "AC Power",
-            "nl": "AC Power"
-          }
-        },
-        "meter_power": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "Total Yield",
-            "nl": "Totale opbrengst"
-          }
-        },
-        "measure_voltage.dc": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "DC Voltage",
-            "nl": "DC Voltage"
-          }
-        },
-        "measure_voltage.meter": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "AC Voltage",
-            "nl": "AC Voltage"
-          }
-        },
-        "measure_temperature": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "Heatsink temperature",
-            "nl": "Heatsink temperatuur"
-          }
-        },
-        "meter_power.import": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "Total Import",
-            "nl": "Totale Import"
-          }
-        },
-        "meter_power.export": {
-          "icon": "/assets/sun.svg",
-          "title": {
-            "en": "Total Export",
-            "nl": "Totale Export"
-          }
-        }
-      },
-      "pair": [
-        {
-          "id": "start"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Inverter settings",
-            "nl": "Omvormer instellingen"
-          },
-          "children": [
-            {
-              "id": "address",
-              "type": "text",
-              "value": "0.0.0.0",
-              "label": {
-                "en": "IP Address",
-                "nl": "IP adres"
-              }
-            },
-            {
-              "id": "port",
-              "type": "number",
-              "value": 502,
-              "step": 1,
-              "label": {
-                "en": "Port",
-                "nl": "Poort"
-              }
-            },
-            {
-              "id": "polling",
-              "type": "number",
-              "value": 10,
-              "step": 1,
-              "attr": {
-                "min": 10,
-                "max": 3600
-              },
-              "label": {
-                "en": "Polling",
-                "nl": "Polling"
-              }
-            },
-            {
-              "id": "id",
-              "type": "number",
-              "value": 1,
-              "step": 1,
-              "attr": {
-                "min": 0,
-                "max": 50
-              },
-              "label": {
-                "en": "Inverter ID",
-                "nl": "Inverter ID"
-              }
-            }
-          ]
-        },
-        {
-          "type": "group",
-          "label": {
-            "en": "Advanced"
-          },
-          "children": [
-            {
-              "id": "autoReconnect",
-              "type": "checkbox",
-              "value": true,
-              "label": {
-                "en": "Autoreconnect"
-              }
-            },
-            {
-              "id": "reconnectTimeout",
-              "type": "number",
-              "value": 6,
-              "step": 1,
-              "attr": {
-                "min": 5,
-                "max": 300
-              },
-              "label": {
-                "en": "Reconnect timeout (s)"
               }
             }
           ]
@@ -1285,8 +964,8 @@
                 "max": 3600
               },
               "label": {
-                "en": "Polling (s)",
-                "nl": "Polling (s)"
+                "en": "Polling",
+                "nl": "Polling"
               }
             },
             {
@@ -1326,14 +1005,14 @@
             {
               "id": "reconnectTimeout",
               "type": "number",
-              "value": 62,
-              "step": 1,
+              "value": 5000,
+              "step": 1000,
               "attr": {
-                "min": 5,
-                "max": 300
+                "min": 5000,
+                "max": 20000
               },
               "label": {
-                "en": "Reconnect timeout (s)"
+                "en": "Reconnect timeout (ms)"
               }
             }
           ]

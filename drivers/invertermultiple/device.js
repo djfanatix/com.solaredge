@@ -6,6 +6,7 @@ const net = require('net');
 const decodeData = require('../../lib/decodeData.js');
 const socket = new net.Socket();
 const { ManagerDrivers } = require('homey');
+var EventEmitter = require('events');
 
 class SolaredgeModbusDevice extends Homey.Device {
 
@@ -14,33 +15,39 @@ class SolaredgeModbusDevice extends Homey.Device {
     if (this.getClass() !== 'solarpanel') {
       this.setClass('solarpanel');
     }
-// fix for settings
-var timeout = this.getSetting('reconnectTimeout');
-if (timeout > 4000) {
-  var timeout = (timeout / 1000);
-}
-this.setSettings({
+    // fix for settings
+    var timeout = this.getSetting('reconnectTimeout');
+    if (timeout > 4000) {
+      var timeout = (timeout / 1000);
+    }
+    this.setSettings({
 
-      reconnectTimeout: timeout,
-    });
+          reconnectTimeout: timeout,
+        });
 
     let options = {
       'host': this.getSetting('address'),
       'port': this.getSetting('port'),
-      'unitId': 2,
+      'unitId': this.getSetting('id'),
       'timeout': this.getSetting('reconnectTimeout'),
-      'autoReconnect': this.getSetting('autoReconnect'),
+      'autoReconnect': false,
       'reconnectTimeout': this.getSetting('polling'),
       'logLabel' : 'solaredge Inverter',
       'logLevel': 'error',
       'logEnabled': true
     }
+
+    //'unitId': this.getSetting('id'),
     //set scale to zero at init
     this.setStoreValue('oldscale', 0);
 
+
     // Capabilities for meter NOT INSTALLED
-    var meterinstalled = this.getSetting('meter');
-    var storedgeinstalled = this.getSetting('storedge');
+      //var meterinstalled = this.getSetting('meter');
+      //var storedgeinstalled = this.getSetting('storedge');
+
+    var meterinstalled = false;
+    var storedgeinstalled = false;
     if (meterinstalled != true && this.hasCapability('measure_power.ac')){
       this.removeCapability('measure_power.ac')};
     if (meterinstalled != true && this.hasCapability('ownconsumption')){
@@ -86,19 +93,31 @@ this.setSettings({
     if (this.hasCapability('measure_voltage')){
         this.removeCapability('measure_voltage')};
 
-// Start app
-    let client = new modbus.client.TCP(socket)
+// Start app and IF
+    var unitID = this.getSetting('id');
 
-    socket.connect(options);
+// Set timeout
+    var timeout = unitID * 5000;
+    this.log('timout', timeout);
+    var self = this;
+
+    //self.socket.connect(options);
+//
+    let client = new modbus.client.TCP(socket, unitID)
+    setTimeout(() => {
+      socket.connect(options);
+      this.log('Delay connecting ...');
+    },timeout)
 
     socket.on('connect', () => {
 
       this.log('Connected ...');
+      this.setStoreValue('connected', 1);
       if (!this.getAvailable()) {
         this.setAvailable();
       }
 
-      this.pollingInterval = setInterval(() => {
+
 
 // start normale poll
         Promise.all([
@@ -146,28 +165,28 @@ this.setSettings({
           // STATUS
           if (this.getCapabilityValue('status') != Homey.__('Off') && inverterstatus == 1) {
             this.setCapabilityValue('status', Homey.__('Off'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Off') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Off') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Sleeping') && inverterstatus == 2) {
             this.setCapabilityValue('status', Homey.__('Sleeping'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Sleeping') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Sleeping') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Wake up') && inverterstatus == 3) {
             this.setCapabilityValue('status', Homey.__('Wake up'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Wake up') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Wake up') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Producing') && inverterstatus == 4) {
             this.setCapabilityValue('status', Homey.__('Producing'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Producing') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Producing') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Throttled') && inverterstatus == 5) {
             this.setCapabilityValue('status', Homey.__('Throttled'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Throttled') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Throttled') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Shutting down') && inverterstatus == 6) {
             this.setCapabilityValue('status', Homey.__('Shutting down'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Shutting down') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Shutting down') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Fault') && inverterstatus == 7) {
             this.setCapabilityValue('status', Homey.__('Fault'));
-            Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Fault') }, {});
+            Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Fault') }, {});
           } else if (this.getCapabilityValue('status') != Homey.__('Maintenance') && inverterstatus == 8) {
           this.setCapabilityValue('status', Homey.__('Maintenance'));
-          Homey.ManagerFlow.getCard('trigger', 'changedStatus').trigger(this, { status: Homey.__('Maintenance') }, {});
+          Homey.ManagerFlow.getCard('trigger', 'changedStatus1').trigger(this, { status: Homey.__('Maintenance') }, {});
           }
 
           //errors
@@ -176,7 +195,7 @@ this.setSettings({
         })
         // AC POWER
         var storedgeinstalled = this.getSetting('storedge');
-        //this.log('Storedge installed?', storedgeinstalled);
+        this.log('Storedge installed?', storedgeinstalled);
         if (storedgeinstalled === true) {
         }
         else {
@@ -195,7 +214,7 @@ this.setSettings({
           var acpower = Math.round(acpower);
           this.setCapabilityValue('measure_power', acpower);
           this.setStoreValue('acpower', acpower);
-          //this.log('AC POWER zonder storedge')
+          this.log('AC POWER zonder storedge')
 
           //errors
         }).catch((err) => {
@@ -203,9 +222,9 @@ this.setSettings({
 })}
 
         // METER INSTALLED?
-        var meterinstalled = this.getSetting('meter');
-        var storedgeinstalled = this.getSetting('storedge');
-      //  this.log('meter?', meterinstalled);
+        var meterinstalled = false;
+        var storedgeinstalled = false;
+        this.log('meter?', meterinstalled);
         if ((meterinstalled === true) && (storedgeinstalled === false)) {
           Promise.all([
             client.readHoldingRegisters(40206, 1), //0 importexport meter
@@ -258,9 +277,9 @@ this.setSettings({
               this.setCapabilityValue('powergrid_export', powergrid_export);
               this.setCapabilityValue('powergrid_import', powergrid_import);
               this.setCapabilityValue('ownconsumption', ownconsumption);
-              Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-              Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-              Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedExportPower1').trigger(this, { export: powergrid_export }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedImportPower1').trigger(this, { import: powergrid_import }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedConsumption1').trigger(this, { consumption: ownconsumption }, {});
             }
             else {
               var powergrid_export = powergrid;
@@ -269,9 +288,9 @@ this.setSettings({
               this.setCapabilityValue('powergrid_export', powergrid_export);
               this.setCapabilityValue('powergrid_import', powergrid_import);
               this.setCapabilityValue('ownconsumption', ownconsumption);
-              Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-              Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-              Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedExportPower1').trigger(this, { export: powergrid_export }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedImportPower1').trigger(this, { import: powergrid_import }, {});
+              Homey.ManagerFlow.getCard('trigger', 'changedConsumption1').trigger(this, { consumption: ownconsumption }, {});
             }
 
             //errors
@@ -282,8 +301,8 @@ this.setSettings({
       }
   //StorEdge
 
-  var storedge = this.getSetting('storedge');
-  if (storedge != true) {
+  var storedge = false;
+  if (storedge != true) {this.log('geen storedge')
 }
 else {
   Promise.all([
@@ -372,17 +391,17 @@ else {
       var powergrid_export = 0;
       var powergrid_import = 65535 - powergrid;
       var ownconsumption = acpower + powergrid_import;
-      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-      Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-      Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedExportPower1').trigger(this, { export: powergrid_export }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedImportPower1').trigger(this, { import: powergrid_import }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedConsumption1').trigger(this, { consumption: ownconsumption }, {});
     }
     else {
       var powergrid_export = powergrid;
       var powergrid_import = 0;
       var ownconsumption = acpower - powergrid_export;
-      Homey.ManagerFlow.getCard('trigger', 'changedExportPower').trigger(this, { export: powergrid_export }, {});
-      Homey.ManagerFlow.getCard('trigger', 'changedImportPower').trigger(this, { import: powergrid_import }, {});
-      Homey.ManagerFlow.getCard('trigger', 'changedConsumption').trigger(this, { consumption: ownconsumption }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedExportPower1').trigger(this, { export: powergrid_export }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedImportPower1').trigger(this, { import: powergrid_import }, {});
+      Homey.ManagerFlow.getCard('trigger', 'changedConsumption1').trigger(this, { consumption: ownconsumption }, {});
     }
 
 // avoid sub zero solar
@@ -659,7 +678,6 @@ else {
     dischargehex1 =  16384;
     dischargehex2 =  17820;}
 //////////////
-
 this.log('controlmodeget', storagecontrolget);
 this.log('controlmodeset', controlmodeset);
 this.log('remotecontrolset', remotecontrolset);
@@ -668,7 +686,6 @@ this.log('chargeget', chargeget);
 this.log('chargeset', chargepower);
 this.log('dischargeget', dischargeget);
 this.log('dischargeset', dischargepower);
-
 // dit is het schrijven voor storage control
 
 if (controlmodeset == storagecontrolget) {
@@ -714,30 +731,35 @@ else {
   //errors
 /// else sluiten
 }
-  // Dit sluit de polling
-      }, this.getSetting('polling') * 1000)
-
+  this.pollingInterval = setInterval(() => {
+    socket.end();
+  }, this.getSetting('polling') * 1500)
     })
+  // Dit sluit de polling
+//
     //avoid all the crash reports
     socket.on('error', (err) => {
       this.log(err);
-      this.setUnavailable(err.err);
-      socket.end();
+    //  this.setUnavailable(err.err);
+    //  socket.end();
     })
 
     socket.on('close', () => {
-      this.log('Client closed, retrying in xx seconds');
-
+      this.log('Client closed');
       clearInterval(this.pollingInterval);
+      var unitID = this.getSetting('id')
+      var timeout = ((unitID * 5000) + 20000)
 
       setTimeout(() => {
+        var unitID = this.getSetting('id')
+        var timeout = ((unitID * 5000) + 20000)
         socket.connect(options);
-        this.log('Reconnecting now ...');
-      }, this.getSetting('reconnectTimeout') * 1000)
-    })
+        this.log('reconnecting connecting ...');
+      },timeout)
+})
+
 
   }
-
   onDeleted() {
     clearInterval(this.pollingInterval);
   }
